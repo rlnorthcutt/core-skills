@@ -37,28 +37,40 @@ Skills are grouped by rollout wave — see each skill's SKILL.md for status.
 ### Wave 1 — prompt-only, ready now
 | Skill | Purpose |
 |---|---|
-| `review-code` | Correctness-focused review of code changes |
-| `review-security` | Security-focused review of code changes |
-| `simplify-code` | Quality cleanup of changed code (not bug-hunting) |
-| `write-draft` | Complete short-form drafts: emails, messages, posts, bios |
-| `humanize-text` | Strip AI-sounding patterns from writing |
-| `resolve-recipient` | Verify the right people before person-directed actions |
-| `personal-context` | Pull relevant memory/continuity before acting |
+| `review-code` | Correctness-focused review of code changes: bugs, edge cases, regressions, and severity-ranked findings |
+| `review-security` | Security-focused review of code changes: injection, auth flaws, secret leakage, unsafe dependencies |
+| `simplify-code` | Quality cleanup of changed code: reuse, simplification, efficiency, and altitude |
+| `write-drafts` | Compose complete short-form drafts — messages, emails, posts, bios, blurbs — register-matched, purpose-first, with unknowns marked rather than invented |
+| `humanize-text` | Remove AI tells and patterns from writing so it reads like a competent human wrote it — kills em-dash spam, 'delve/dive' verbs, rule-of-three lists, hollow intensifiers, and structural tells like perfect parallelism and summary performances |
+| `resolve-recipient` | Resolve and verify the correct people before sending messages, email, invitations, or creating calendar events |
+| `personal-context` | Detect when prior conversation state, decisions, preferences, or past attempts should change the current answer — and pull the relevant memory before acting |
 
-### Wave 2 — platform meta-skills
+### Wave 2 — platform meta-skills (Omnideck-optimized creators)
 | Skill | Purpose |
 |---|---|
-| `improve` | Review the conversation, then create the fix (skill/tool/app/profile) |
-| `create-skill` | Create, validate, and install new skills |
-| `create-agent` | Design and register agent profiles |
-| `create-tool` | Design and register reusable custom tools |
-| `create-app` | Build Omnideck Custom Apps |
-| `write-docs` | Write and maintain documentation |
+| `improve` | Reflect on the current conversation — what worked, what didn't — and turn those lessons into something concrete: a new skill, a custom tool, a change to an existing skill or tool, a custom app, or an agent profile |
+| `skill-creator` | Create high-quality, well-scoped skills — loadable bundles of a prompt plus tool categories |
+| `agent-creator` | Create agent profiles — reusable agent configurations bundling a persona (system prompt), skill grants, model, and inference parameters |
+| `tool-creator` | Create custom tools — parameterized, reusable operations that persist across sessions and are discoverable by all agents |
+| `app-creator` | Create and manage Omnideck Custom Apps — self-contained apps in the apps directory with a manifest (omnideck.json), a web/ frontend, optional app.py backend actions, and data persistence |
 
-### Later waves
-`research`, `plan-learning`, `generate-image`, `visualize`, `visualize-data`,
-`edit-spreadsheet`, `edit-document`, `edit-presentation`, `edit-pdf`, `install-skill`,
-`design`, and the artifact family.
+### Wave 3 — writing, docs & learning
+| Skill | Purpose |
+|---|---|
+| `write-docs` | Write and maintain technical documentation — READMEs, how-tos, API references, architecture notes, changelogs |
+| `research` | Multi-source research: refine the question, search and read broadly, triangulate across sources, and synthesize findings with provenance and confidence levels |
+| `learning-planner` | Build spaced-repetition learning plans: break a topic into a dependency-ordered map, schedule it across available time, produce cards and resources, and set the review cadence |
+
+### Wave 4 — office & media
+| Skill | Purpose |
+|---|---|
+| `make-docs` | Create and edit Word-style documents (.docx) — outline-first structure, style-based formatting, preserved hierarchy on edits, verified output |
+| `make-sheets` | Create, edit, analyze, and chart spreadsheets (xlsx, xls, csv, tsv, Google Sheets) — type-safe data models, formula-first authoring, chart-to-question matching, verified output |
+| `make-slides` | Create and edit PowerPoint or Google Slides presentations — story-first structure, audience-appropriate design, assertion headlines, speaker notes, verified rendering |
+| `make-pdfs` | Read, create, modify, and visually verify PDFs — extraction with the right tool per document type, source-format rendering, image-level verification before delivery |
+| `image-generation` | Generate or edit images with deliberate craft — prompt structure, style control, iteration strategy, and when generation is the wrong tool |
+| `draw-charts` | Create data visualizations — chart-type selection matched to the question, honest encodings, data hygiene, verified rendering |
+| `visualize` | Build interactive diagrams, simulations, graphs, and mockups as self-contained HTML artifacts — parameter controls, live output, single-screen views |
 
 ## Sources
 
