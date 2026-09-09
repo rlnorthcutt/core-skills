@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Omnideck Skills — Addition Plan</title>
+<style>
+  :root{
+    --bg:#0e1116; --panel:#161b22; --panel2:#1c2128; --line:#2d333b;
+    --text:#e6edf3; --muted:#8b949e; --accent:#58a6ff;
+    --easy:#3fb950; --involved:#d29922; --complex:#f85149;
+    --vhigh:#bc8cff; --vmed:#58a6ff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6;padding:40px 24px 100px}
+  .wrap{max-width:1140px;margin:0 auto}
+  h1{font-size:2rem;margin-bottom:4px}
+  .sub{color:var(--muted);margin-bottom:24px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:24px 0 36px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+  .stat .n{font-size:1.8rem;font-weight:700}
+  .stat .l{font-size:.8rem;color:var(--muted)}
+  h2{font-size:1.3rem;margin:44px 0 8px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .tier-note{color:var(--muted);font-size:.92rem;margin-bottom:18px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
+  .card h3{font-size:1.02rem;margin-bottom:2px}
+  .card .id{font-family:ui-monospace,monospace;font-size:.78rem;color:var(--accent)}
+  .badges{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}
+  .badge{font-size:.68rem;font-weight:600;padding:3px 10px;border-radius:99px;letter-spacing:.03em;text-transform:uppercase;border:1px solid}
+  .easy-b{color:var(--easy);border-color:var(--easy);background:rgba(63,185,80,.08)}
+  .involved-b{color:var(--involved);border-color:var(--involved);background:rgba(210,153,34,.08)}
+  .complex-b{color:var(--complex);border-color:var(--complex);background:rgba(248,81,73,.08)}
+  .vh-b{color:var(--vhigh);border-color:var(--vhigh);background:rgba(188,140,255,.08)}
+  .vm-b{color:var(--vmed);border-color:var(--vmed);background:rgba(88,166,255,.08)}
+  .card p{font-size:.88rem;color:#c9d1d9;margin-bottom:8px}
+  .val{font-size:.8rem;color:var(--muted)}
+  .val b{color:var(--text)}
+  table{width:100%;border-collapse:collapse;font-size:.86rem;margin:14px 0}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em}
+  .order-num{color:var(--accent);font-weight:700;font-family:ui-monospace,monospace}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Omnideck Skills — Addition Plan</h1>
+<div class="sub">17 skills to add, classified by implementation difficulty and user value · skills live as JSON records in <code>{state}/skills/</code></div>
+
+<div class="stats">
+  <div class="stat"><div class="n">17</div><div class="l">skills to add</div></div>
+  <div class="stat"><div class="n" style="color:var(--easy)">6</div><div class="l">easy — drop in</div></div>
+  <div class="stat"><div class="n" style="color:var(--involved)">8</div><div class="l">involved — some work</div></div>
+  <div class="stat"><div class="n" style="color:var(--complex)">3</div><div class="l">complex — recreate</div></div>
+</div>
+
+<h2>Difficulty tiers</h2>
+<p class="tier-note"><b style="color:var(--easy)">Easy — drop in:</b> prompt-only skill records; write JSON, install, verify. No new dependencies.</p>
+<p class="tier-note"><b style="color:var(--involved)">Involved — some work:</b> need supporting libraries installed, file-output workflows, and render-verification steps before they're reliable.</p>
+<p class="tier-note"><b style="color:var(--complex)">Complex — recreate:</b> worth having but must be rebuilt around Omnideck's runtime (custom apps, interactive artifacts) rather than ported from source material.</p>
+
+<h2>Recommended rollout order</h2>
+<table>
+<tr><th>#</th><th>Skill</th><th>Difficulty</th><th>Value</th><th>Why this order</th></tr>
+<tr><td class="order-num">01</td><td>skill-creator</td><td>Easy</td><td>High</td><td>Meta-skill — unblocks creating the rest</td></tr>
+<tr><td class="order-num">02</td><td>write-docs</td><td>Easy</td><td>High</td><td>Prompt-only, immediate user value</td></tr>
+<tr><td class="order-num">03</td><td>humanize-text</td><td>Easy</td><td>High</td><td>Prompt-only, high-frequency need</td></tr>
+<tr><td class="order-num">04</td><td>write-drafts</td><td>Easy</td><td>High</td><td>Prompt-only, daily-use surface</td></tr>
+<tr><td class="order-num">05</td><td>learning-planner</td><td>Easy</td><td>High</td><td>Prompt-only, strong differentiator</td></tr>
+<tr><td class="order-num">06</td><td>research</td><td>Easy</td><td>High</td><td>Prompt-only over existing browser tools</td></tr>
+<tr><td class="order-num">07</td><td>image-generation</td><td>Easy</td><td>Medium</td><td>Grants existing image_generation category</td></tr>
+<tr><td class="order-num">08</td><td>agent-creator</td><td>Easy</td><td>Medium</td><td>Prompt-only over existing profile system</td></tr>
+<tr><td class="order-num">09</td><td>tool-creator</td><td>Involved</td><td>High</td><td>Needs custom-tool registry conventions</td></tr>
+<tr><td class="order-num">10</td><td>make-sheets</td><td>Involved</td><td>High</td><td>openpyxl + verification pass</td></tr>
+<tr><td class="order-num">11</td><td>make-docs (documents)</td><td>Involved</td><td>High</td><td>python-docx + render check</td></tr>
+<tr><td class="order-num">12</td><td>make-slides</td><td>Involved</td><td>High</td><td>python-pptx + visual verify</td></tr>
+<tr><td class="order-num">13</td><td>make-pdfs</td><td>Involved</td><td>High</td><td>poppler, weasyprint, pdfplumber</td></tr>
+<tr><td class="order-num">14</td><td>draw-charts</td><td>Involved</td><td>Medium</td><td>Chart libs + visual verify</td></tr>
+<tr><td class="order-num">15</td><td>visualize</td><td>Complex</td><td>High</td><td>Interactive artifacts need runtime design</td></tr>
+<tr><td class="order-num">16</td><td>app-creator</td><td>Complex</td><td>High</td><td>Full custom-app lifecycle</td></tr>
+<tr><td class="order-num">17</td><td>improve</td><td>Involved</td><td>High</td><td>Orchestrates the other creator skills</td></tr>
+</table>
+
+<h2>Wave 1 — Quick wins</h2>
+<div class="cards">
+  <div class="card"><h3>Improve</h3><div class="id">improve</div><div class="badges"><span class="badge involved-b">Involved</span><span class="badge vh-b">High value</span></div>
+  <p>Reflects on the current conversation — what worked, what didn't — and turns lessons into concrete artifacts: a new skill, a custom tool, edits to existing skills/tools, a custom app, or an agent profile.</p>
+  <p class="val"><b>Value:</b> closes the feedback loop between sessions and system setup; every friction point becomes a permanent improvement instead of a repeated cost.</p></div>
+
+  <div class="card"><h3>Skill Creator</h3><div class="id">skill-creator</div><div class="badges"><span class="badge easy-b">Easy</span><span class="badge vh-b">High value</span></div>
+  <p>Creates high-quality, well-scoped skills: gathers requirements, drafts the skill record, validates naming and trigger clarity, installs, verifies it loads.</p>
+  <p class="val"><b>Value:</b> meta-capability — lets users teach the system new procedures themselves; every other skill in this plan gets easier once this exists.</p></div>
+
+  <div class="card"><h3>Docs Writer</h3><div class="id">write-docs</div><div class="badges"><span class="badge easy-b">Easy</span><span class="badge vh-b">High value</span></div>
+  <p>Writes and maintains technical documentation — READMEs, how-tos, API references, architecture notes, changelogs — verified against the actual code.</p>
+  <p class="val"><b>Value:</b> docs are universally needed and universally stale; verification-against-code is the differentiator between this and generic doc generation.</p></div>
+
+  <div class="card"><h3>Humanize Content</h3><div class="id">humanize-text</div><div class="badges"><span class="badge easy-b">Easy</span><span class="badge vh-b">High value</span></div>
+  <p>Removes AI tells and patterns from writing — em-dash density, "delve" verbs, rule-of-three lists, hollow intensifiers, perfect parallelism, summary performances.</p>
+  <p class="val"><b>Value:</b> immediate, visible quality gain on any user-facing text; high-frequency request once available.</p></div>
+
+  <div class="card"><h3>Learning</h3><div class="id">learning-planner</div><div class="badges"><span class="badge easy-b">Easy</span><span class="badge vh-b">High value</span></div>
+  <p>Builds spaced-repetition learning plans: dependency-ordered topic maps, schedules fitted to real weekly budgets, atomic flashcards, curated resources, review cadence.</p>
+  <p class="val"><b>Value:</b> turns "I want to learn X" into an operable plan; spaced repetition is the evidence-based core, not a garnish.</p></div>
+
+  <div class="card"><h3>Writing Blocks</h3><div class="id">write-drafts</div><div class="badges"><span class="badge easy-b">Easy</span><span class="badge vh-b">High value</span></div>
+  <p>Composes messages, emails, posts, and bios — register-matched, one ask per draft, purpose in line one, unknowns marked rather than invented.</p>
+  <p class="val"><b>Value:</b> highest-frequency writing surface; done well it replaces most ad-hoc drafting requests.</p></div>
+</div>
+
+<h2>Wave 2 — Office & media</h2>
+<div class="cards">
+  <div class="card"><h3>Presentations</h3><div class="id">make-slides</div><div class="badges"><span class="badge involved-b">Involved</span><span class="badge vm-b">High value</span></div>
+  <p>Creates and edits PowerPoint / Google Slides decks — story-first structure, assertion headlines, speaker notes, render-verified output.</p>
+  <p class="val"><b>Work:</b> python-pptx pipeline + slide-image verification pass. <b>Value:</b> high-frequency deliverable; correctness of rendering is what makes it trustworthy.</p></div>
+
+  <div class="card"><h3>Spreadsheets</h3><div class="id">make-sheets</div><div class="badges"><span class="badge involved-b">Involved</span><span class="badge vm-b">High value</span></div>
+  <p>Creates, edits, analyzes, and charts Excel / CSV / Google Sheets data — type-safe data models, formula-first, chart-to-question matching.</p>
+  <p class="val"><b>Work:</b> openpyxl + round-trip verification. <b>Value:</b> data work is a top use case; the analysis hygiene is the differentiator.</p></div>
+
+  <div class="card"><h3>Documents</h3><div class="id">make-docs</div><div class="badges"><span class="badge involved-b">Involved</span><span class="badge vm-b">High value</span></div>
+  <p>Creates and edits Word-style documents — style-based structure, outline-first, preserved heading hierarchy on edit.</p>
+  <p class="val"><b>Work:</b> python-docx + render check. <b>Value:</b> the structured-editing discipline (styles over manual formatting) is what separates it from raw generation.</p></div>
+
+  <div class="card"><h3>PDF</h3><div class="id">make-pdfs</div><div class="badges"><span class="badge involved-b">Involved</span><span class="badge vm-b">High value</span></div>
+  <p>Reads, creates, modifies, and visually verifies PDFs — extraction with the right tool per document type, source-format rendering, image-level verification.</p>
+  <p class="val"><b>Work:</b> poppler/weasyprint/pdfplumber toolchain + verify loop. <b>Value:</b> PDFs are where silent failures live; the verification step is the whole point.</p></div>
+
+  <div class="card"><h3>Image Generation</h3><div class="id">image-generation</div><div class="badges"><span class="badge easy-b">Easy</span><span class="badge vm-b">Medium value</span></div>
+  <p>Generates and edits images — grants the existing image_generation category and adds the prompt craft: style control, iteration, composition direction.</p>
+  <p class="val"><b>Value:</b> plumbing exists; this makes output quality deliberate rather than accidental.</p></div>
+</div>
+
+<h2>Wave 3 — Creators & research</h2>
+<div class="cards">
+  <div class="card"><h3>Tool Creator</h3><div class="id">tool-creator</div><div class="badges"><span class="badge involved-b">Involved</span><span class="badge vh-b">High value</span></div>
+  <p>Creates custom tools — parameterized, reusable operations registered for discovery, with typed parameters and least-privilege scope.</p>
+  <p class="val"><b>Value:</b> turns one-off scripting into permanent capability; pairs with skill-creator as the other half of "teach the system to do this."</p></div>
+
+  <div class="card"><h3>Agent Creator</h3><div class="id">agent-creator</div><div class="badges"><span class="badge easy-b">Easy</span><span class="badge vm-b">Medium value</span></div>
+  <p>Creates agent profiles — persona, minimal skill grants, system prompt teaching the essentials, right default model.</p>
+  <p class="val"><b>Value:</b> packages recurring setups into reusable starting points.</p></div>
+
+  <div class="card"><h3>Visualize</h3><div class="id">visualize</div><div class="badges"><span class="badge complex-b">Complex</span><span class="badge vh-b">High value</span></div>
+  <p>Builds interactive diagrams, simulations, graphs, and mockups — single-file HTML artifacts with parameter controls and live output.</p>
+  <p class="val"><b>Work:</b> needs an interactive-artifact runtime decision before it's reliable. <b>Value:</b> highest-ceiling skill in the plan — mechanisms you can manipulate, not just view.</p></div>
+
+  <div class="card"><h3>App Creator</h3><div class="id">app-creator</div><div class="badges"><span class="badge complex-b">Complex</span><span class="badge vh-b">High value</span></div>
+  <p>Creates and manages custom apps — manifest, frontend, optional actions, data persistence, served from the apps directory.</p>
+  <p class="val"><b>Work:</b> full custom-app lifecycle; depends on the same runtime decisions as visualize. <b>Value:</b> the "build me a tool I can open" end of the spectrum.</p></div>
+
+  <div class="card"><h3>Research</h3><div class="id">research</div><div class="badges"><span class="badge easy-b">Easy</span><span class="badge vh-b">High value</span></div>
+  <p>Multi-source research over existing browser/webfetch tools — question refinement, source triangulation, synthesis with provenance.</p>
+  <p class="val"><b>Value:</b> the workflow already exists implicitly; making it a skill makes it consistent and citable.</p></div>
+</div>
+
+</div>
+</body>
+</html>
