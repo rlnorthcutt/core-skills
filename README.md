@@ -35,11 +35,14 @@ when the backing integration is connected.
 Skills are grouped by rollout wave — see each skill's SKILL.md for status.
 
 ### Wave 1 — prompt-only, ready now
+
+> `write-code` is the verb-first replacement for the shipped `coder` skill (see backlog CR-22).
 | Skill | Purpose |
 |---|---|
 | `review-code` | Correctness-focused review of code changes: bugs, edge cases, regressions, and severity-ranked findings |
 | `review-security` | Security-focused review of code changes: injection, auth flaws, secret leakage, unsafe dependencies |
 | `simplify-code` | Quality cleanup of changed code: reuse, simplification, efficiency, and altitude |
+| `write-code` | Write, edit, run, and debug code in the virtual computer — file editing, shell commands, package installs, long-running processes, git/GitHub |
 | `write-drafts` | Compose complete short-form drafts — messages, emails, posts, bios, blurbs — register-matched, purpose-first, with unknowns marked rather than invented |
 | `humanize-text` | Remove AI tells and patterns from writing so it reads like a competent human wrote it — kills em-dash spam, 'delve/dive' verbs, rule-of-three lists, hollow intensifiers, and structural tells like perfect parallelism and summary performances |
 | `resolve-recipient` | Resolve and verify the correct people before sending messages, email, invitations, or creating calendar events |
