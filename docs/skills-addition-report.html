@@ -63,22 +63,22 @@
 <h2>Recommended rollout order</h2>
 <table>
 <tr><th>#</th><th>Skill</th><th>Difficulty</th><th>Value</th><th>Why this order</th></tr>
-<tr><td class="order-num">01</td><td>skill-creator</td><td>Easy</td><td>High</td><td>Meta-skill — unblocks creating the rest</td></tr>
+<tr><td class="order-num">01</td><td>create-skill</td><td>Easy</td><td>High</td><td>Meta-skill — unblocks creating the rest</td></tr>
 <tr><td class="order-num">02</td><td>write-docs</td><td>Easy</td><td>High</td><td>Prompt-only, immediate user value</td></tr>
 <tr><td class="order-num">03</td><td>humanize-text</td><td>Easy</td><td>High</td><td>Prompt-only, high-frequency need</td></tr>
 <tr><td class="order-num">04</td><td>write-drafts</td><td>Easy</td><td>High</td><td>Prompt-only, daily-use surface</td></tr>
-<tr><td class="order-num">05</td><td>learning-planner</td><td>Easy</td><td>High</td><td>Prompt-only, strong differentiator</td></tr>
+<tr><td class="order-num">05</td><td>plan-learning</td><td>Easy</td><td>High</td><td>Prompt-only, strong differentiator</td></tr>
 <tr><td class="order-num">06</td><td>research</td><td>Easy</td><td>High</td><td>Prompt-only over existing browser tools</td></tr>
-<tr><td class="order-num">07</td><td>image-generation</td><td>Easy</td><td>Medium</td><td>Grants existing image_generation category</td></tr>
-<tr><td class="order-num">08</td><td>agent-creator</td><td>Easy</td><td>Medium</td><td>Prompt-only over existing profile system</td></tr>
-<tr><td class="order-num">09</td><td>tool-creator</td><td>Involved</td><td>High</td><td>Needs custom-tool registry conventions</td></tr>
+<tr><td class="order-num">07</td><td>generate-image</td><td>Easy</td><td>Medium</td><td>Grants existing image_generation category</td></tr>
+<tr><td class="order-num">08</td><td>create-agent</td><td>Easy</td><td>Medium</td><td>Prompt-only over existing profile system</td></tr>
+<tr><td class="order-num">09</td><td>create-tool</td><td>Involved</td><td>High</td><td>Needs custom-tool registry conventions</td></tr>
 <tr><td class="order-num">10</td><td>make-sheets</td><td>Involved</td><td>High</td><td>openpyxl + verification pass</td></tr>
 <tr><td class="order-num">11</td><td>make-docs (documents)</td><td>Involved</td><td>High</td><td>python-docx + render check</td></tr>
 <tr><td class="order-num">12</td><td>make-slides</td><td>Involved</td><td>High</td><td>python-pptx + visual verify</td></tr>
 <tr><td class="order-num">13</td><td>make-pdfs</td><td>Involved</td><td>High</td><td>poppler, weasyprint, pdfplumber</td></tr>
 <tr><td class="order-num">14</td><td>draw-charts</td><td>Involved</td><td>Medium</td><td>Chart libs + visual verify</td></tr>
 <tr><td class="order-num">15</td><td>visualize</td><td>Complex</td><td>High</td><td>Interactive artifacts need runtime design</td></tr>
-<tr><td class="order-num">16</td><td>app-creator</td><td>Complex</td><td>High</td><td>Full custom-app lifecycle</td></tr>
+<tr><td class="order-num">16</td><td>create-app</td><td>Complex</td><td>High</td><td>Full custom-app lifecycle</td></tr>
 <tr><td class="order-num">17</td><td>improve</td><td>Involved</td><td>High</td><td>Orchestrates the other creator skills</td></tr>
 </table>
 
@@ -88,7 +88,7 @@
   <p>Reflects on the current conversation — what worked, what didn't — and turns lessons into concrete artifacts: a new skill, a custom tool, edits to existing skills/tools, a custom app, or an agent profile.</p>
   <p class="val"><b>Value:</b> closes the feedback loop between sessions and system setup; every friction point becomes a permanent improvement instead of a repeated cost.</p></div>
 
-  <div class="card"><h3>Skill Creator</h3><div class="id">skill-creator</div><div class="badges"><span class="badge easy-b">Easy</span><span class="badge vh-b">High value</span></div>
+  <div class="card"><h3>Skill Creator</h3><div class="id">create-skill</div><div class="badges"><span class="badge easy-b">Easy</span><span class="badge vh-b">High value</span></div>
   <p>Creates high-quality, well-scoped skills: gathers requirements, drafts the skill record, validates naming and trigger clarity, installs, verifies it loads.</p>
   <p class="val"><b>Value:</b> meta-capability — lets users teach the system new procedures themselves; every other skill in this plan gets easier once this exists.</p></div>
 
@@ -100,7 +100,7 @@
   <p>Removes AI tells and patterns from writing — em-dash density, "delve" verbs, rule-of-three lists, hollow intensifiers, perfect parallelism, summary performances.</p>
   <p class="val"><b>Value:</b> immediate, visible quality gain on any user-facing text; high-frequency request once available.</p></div>
 
-  <div class="card"><h3>Learning</h3><div class="id">learning-planner</div><div class="badges"><span class="badge easy-b">Easy</span><span class="badge vh-b">High value</span></div>
+  <div class="card"><h3>Learning</h3><div class="id">plan-learning</div><div class="badges"><span class="badge easy-b">Easy</span><span class="badge vh-b">High value</span></div>
   <p>Builds spaced-repetition learning plans: dependency-ordered topic maps, schedules fitted to real weekly budgets, atomic flashcards, curated resources, review cadence.</p>
   <p class="val"><b>Value:</b> turns "I want to learn X" into an operable plan; spaced repetition is the evidence-based core, not a garnish.</p></div>
 
@@ -127,18 +127,18 @@
   <p>Reads, creates, modifies, and visually verifies PDFs — extraction with the right tool per document type, source-format rendering, image-level verification.</p>
   <p class="val"><b>Work:</b> poppler/weasyprint/pdfplumber toolchain + verify loop. <b>Value:</b> PDFs are where silent failures live; the verification step is the whole point.</p></div>
 
-  <div class="card"><h3>Image Generation</h3><div class="id">image-generation</div><div class="badges"><span class="badge easy-b">Easy</span><span class="badge vm-b">Medium value</span></div>
+  <div class="card"><h3>Image Generation</h3><div class="id">generate-image</div><div class="badges"><span class="badge easy-b">Easy</span><span class="badge vm-b">Medium value</span></div>
   <p>Generates and edits images — grants the existing image_generation category and adds the prompt craft: style control, iteration, composition direction.</p>
   <p class="val"><b>Value:</b> plumbing exists; this makes output quality deliberate rather than accidental.</p></div>
 </div>
 
 <h2>Wave 3 — Creators & research</h2>
 <div class="cards">
-  <div class="card"><h3>Tool Creator</h3><div class="id">tool-creator</div><div class="badges"><span class="badge involved-b">Involved</span><span class="badge vh-b">High value</span></div>
+  <div class="card"><h3>Tool Creator</h3><div class="id">create-tool</div><div class="badges"><span class="badge involved-b">Involved</span><span class="badge vh-b">High value</span></div>
   <p>Creates custom tools — parameterized, reusable operations registered for discovery, with typed parameters and least-privilege scope.</p>
-  <p class="val"><b>Value:</b> turns one-off scripting into permanent capability; pairs with skill-creator as the other half of "teach the system to do this."</p></div>
+  <p class="val"><b>Value:</b> turns one-off scripting into permanent capability; pairs with create-skill as the other half of "teach the system to do this."</p></div>
 
-  <div class="card"><h3>Agent Creator</h3><div class="id">agent-creator</div><div class="badges"><span class="badge easy-b">Easy</span><span class="badge vm-b">Medium value</span></div>
+  <div class="card"><h3>Agent Creator</h3><div class="id">create-agent</div><div class="badges"><span class="badge easy-b">Easy</span><span class="badge vm-b">Medium value</span></div>
   <p>Creates agent profiles — persona, minimal skill grants, system prompt teaching the essentials, right default model.</p>
   <p class="val"><b>Value:</b> packages recurring setups into reusable starting points.</p></div>
 
@@ -146,7 +146,7 @@
   <p>Builds interactive diagrams, simulations, graphs, and mockups — single-file HTML artifacts with parameter controls and live output.</p>
   <p class="val"><b>Work:</b> needs an interactive-artifact runtime decision before it's reliable. <b>Value:</b> highest-ceiling skill in the plan — mechanisms you can manipulate, not just view.</p></div>
 
-  <div class="card"><h3>App Creator</h3><div class="id">app-creator</div><div class="badges"><span class="badge complex-b">Complex</span><span class="badge vh-b">High value</span></div>
+  <div class="card"><h3>App Creator</h3><div class="id">create-app</div><div class="badges"><span class="badge complex-b">Complex</span><span class="badge vh-b">High value</span></div>
   <p>Creates and manages custom apps — manifest, frontend, optional actions, data persistence, served from the apps directory.</p>
   <p class="val"><b>Work:</b> full custom-app lifecycle; depends on the same runtime decisions as visualize. <b>Value:</b> the "build me a tool I can open" end of the spectrum.</p></div>
 

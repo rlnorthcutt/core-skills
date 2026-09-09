@@ -49,17 +49,17 @@ Skills are grouped by rollout wave — see each skill's SKILL.md for status.
 | Skill | Purpose |
 |---|---|
 | `improve` | Reflect on the current conversation — what worked, what didn't — and turn those lessons into something concrete: a new skill, a custom tool, a change to an existing skill or tool, a custom app, or an agent profile |
-| `skill-creator` | Create high-quality, well-scoped skills — loadable bundles of a prompt plus tool categories |
-| `agent-creator` | Create agent profiles — reusable agent configurations bundling a persona (system prompt), skill grants, model, and inference parameters |
-| `tool-creator` | Create custom tools — parameterized, reusable operations that persist across sessions and are discoverable by all agents |
-| `app-creator` | Create and manage Omnideck Custom Apps — self-contained apps in the apps directory with a manifest (omnideck.json), a web/ frontend, optional app.py backend actions, and data persistence |
+| `create-skill` | Create high-quality, well-scoped skills — loadable bundles of a prompt plus tool categories |
+| `create-agent` | Create agent profiles — reusable agent configurations bundling a persona (system prompt), skill grants, model, and inference parameters |
+| `create-tool` | Create custom tools — parameterized, reusable operations that persist across sessions and are discoverable by all agents |
+| `create-app` | Create and manage Omnideck Custom Apps — self-contained apps in the apps directory with a manifest (omnideck.json), a web/ frontend, optional app.py backend actions, and data persistence |
 
 ### Wave 3 — writing, docs & learning
 | Skill | Purpose |
 |---|---|
 | `write-docs` | Write and maintain technical documentation — READMEs, how-tos, API references, architecture notes, changelogs |
 | `research` | Multi-source research: refine the question, search and read broadly, triangulate across sources, and synthesize findings with provenance and confidence levels |
-| `learning-planner` | Build spaced-repetition learning plans: break a topic into a dependency-ordered map, schedule it across available time, produce cards and resources, and set the review cadence |
+| `plan-learning` | Build spaced-repetition learning plans: break a topic into a dependency-ordered map, schedule it across available time, produce cards and resources, and set the review cadence |
 
 ### Wave 4 — office & media
 | Skill | Purpose |
@@ -68,7 +68,7 @@ Skills are grouped by rollout wave — see each skill's SKILL.md for status.
 | `make-sheets` | Create, edit, analyze, and chart spreadsheets (xlsx, xls, csv, tsv, Google Sheets) — type-safe data models, formula-first authoring, chart-to-question matching, verified output |
 | `make-slides` | Create and edit PowerPoint or Google Slides presentations — story-first structure, audience-appropriate design, assertion headlines, speaker notes, verified rendering |
 | `make-pdfs` | Read, create, modify, and visually verify PDFs — extraction with the right tool per document type, source-format rendering, image-level verification before delivery |
-| `image-generation` | Generate or edit images with deliberate craft — prompt structure, style control, iteration strategy, and when generation is the wrong tool |
+| `generate-image` | Generate or edit images with deliberate craft — prompt structure, style control, iteration strategy, and when generation is the wrong tool |
 | `draw-charts` | Create data visualizations — chart-type selection matched to the question, honest encodings, data hygiene, verified rendering |
 | `visualize` | Build interactive diagrams, simulations, graphs, and mockups as self-contained HTML artifacts — parameter controls, live output, single-screen views |
 
