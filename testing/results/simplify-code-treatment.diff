@@ -1,0 +1,30 @@
+--- /home/omnideck/core-skills/testing/fixtures/bugs/inventory-service/service.py	2026-09-10 00:14:00.872056693 +0000
++++ service.py	2026-09-10 00:35:07.017581470 +0000
+@@ -62,18 +62,14 @@
+     def bulk_restock(self, restocks: dict[str, int]) -> dict[str, Item]:
+         """Restock multiple items at once. Returns map of sku -> updated item."""
+         updated = {}
+-        for i in range(len(list(restocks.keys()))):
+-            sku = list(restocks.keys())[i]
+-            amount = restocks[sku]
++        for sku, amount in restocks.items():
+             item = self.restock(sku, amount)
+             updated[sku] = item
+         return updated
+ 
+     def fulfill_by_skus(self, skus: list[str], order_id: str) -> bool:
+         """Fulfill an order that takes exactly 1 of each listed SKU."""
+-        order = Order(order_id=order_id, items={})
+-        for sku in skus:
+-            order.items[sku] = 1
++        order = Order(order_id=order_id, items={sku: 1 for sku in skus})
+         if len(skus) == 0:
+             order.status = "fulfilled"
+             self.orders.append(order)
+@@ -82,5 +78,5 @@
+ 
+     def average_stock(self) -> float:
+         """Average quantity across all items (items with zero stock excluded)."""
+-        quantities = [item.quantity for item in self.items.values() if item.quantity is not None]
++        quantities = [item.quantity for item in self.items.values()]
+         return sum(quantities) / len(quantities)
