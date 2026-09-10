@@ -1,0 +1,7 @@
+# humanize-text — T3 Baseline (no skill loaded)
+
+**Task:** "Make this sound more natural" on technical-passage.md (contains necessary precision).
+
+---
+
+The parser accepts the input conditionally: if the first byte is a UTF-8 BOM, it is skipped; otherwise the stream is decoded as ASCII. This behavior is intentional — legacy feeds in the wild still emit BOMs, and failing to skip them would reject the majority of historical payloads. The decoder raises ValueError only when the payload contains bytes outside 0x00–0x7F after BOM handling; do not "fix" this to accept UTF-8, as downstream consumers assume single-byte encoding.
