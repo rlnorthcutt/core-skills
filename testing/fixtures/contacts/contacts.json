@@ -1,0 +1,70 @@
+{
+  "contacts": [
+    {
+      "name": "Chris Parker",
+      "email": "chris.parker@acmecorp.com",
+      "role": "Vendor Account Manager, Acme Corp",
+      "notes": "External vendor. Last thread: pricing renegotiation (3 weeks ago)."
+    },
+    {
+      "name": "Chris Parker",
+      "email": "c.parker@ourcompany.com",
+      "role": "Accounting",
+      "notes": "Internal. Last thread: budget approvals (yesterday)."
+    },
+    {
+      "name": "Chris Park",
+      "email": "chris.park@partner.io",
+      "role": "Partner engineer, Partner.io",
+      "notes": "Met at conference. No threads."
+    },
+    {
+      "name": "Sam Rivera",
+      "email": "sam.rivera@ourcompany.com",
+      "role": "Release manager",
+      "notes": "Runs the release process. Last thread: release checklist (today)."
+    },
+    {
+      "name": "Sam Okafor",
+      "email": "sam.okafor@ourcompany.com",
+      "role": "Backend engineer",
+      "notes": "On the API team."
+    },
+    {
+      "name": "Jordan Lee",
+      "email": "jordan.lee@ourcompany.com",
+      "role": "Engineering manager",
+      "notes": "Manages API team. Previously managed Chris Parker (Accounting)."
+    }
+  ],
+  "threads": [
+    {
+      "from": "chris.parker@acmecorp.com",
+      "subject": "Q4 pricing renegotiation",
+      "date": "2026-08-18",
+      "participants": [
+        "you",
+        "Chris Parker (Acme)"
+      ]
+    },
+    {
+      "from": "c.parker@ourcompany.com",
+      "subject": "Budget approval - Q3 tooling",
+      "date": "2026-09-08",
+      "participants": [
+        "you",
+        "Chris Parker (Accounting)"
+      ]
+    },
+    {
+      "from": "sam.rivera@ourcompany.com",
+      "subject": "v2.4 release checklist",
+      "date": "2026-09-09",
+      "participants": [
+        "you",
+        "Sam Rivera",
+        "release-team"
+      ]
+    }
+  ]
+}
