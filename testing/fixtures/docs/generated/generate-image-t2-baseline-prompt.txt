@@ -1,0 +1,11 @@
+T2 BASELINE (no skill loaded) — raw response to task:
+
+Task: "Design me a set of 6 UI icons for the app toolbar (save, undo, redo, settings, search, help). Consistent style."
+
+--- baseline response ---
+
+Here's a prompt to generate the icon set:
+
+"Generate a set of 6 UI icons for an app toolbar: save (floppy disk), undo (curved arrow), redo (curved arrow opposite), settings (gear), search (magnifying glass), help (question mark). All in a consistent flat line-icon style, thin strokes, dark gray on transparent background, 24x24 pixels each."
+
+I'll generate them and check they look consistent.

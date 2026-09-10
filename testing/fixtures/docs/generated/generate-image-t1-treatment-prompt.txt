@@ -1,0 +1,31 @@
+T1 TREATMENT (skill: generate-image loaded) — prompt-craft deliverable
+
+Task: "An illustration for the engineering blog post about trunk-based development: a single main branch with small short-lived branches merging in, clean modern flat style, blue accent color, suitable for a hero image 1200x630."
+
+--- ENVIRONMENT HONESTY (per skill rule 3: never pass through unseen output) ---
+This environment has NO image generation tool (no imagegen tool, no API key, no local diffusion model). I cannot produce or inspect an actual raster image. Per the skill's own rule, I will NOT fabricate a generated image or claim one was inspected. The deliverable below is the camera-brief prompt + the inspection plan I would execute, reported honestly as a prompt-craft artifact.
+
+--- 1. Establish the target ---
+- Purpose: engineering blog hero image (trunk-based development). Purpose decides aspect ratio + composition: wide 1200x630 hero, horizontal flow, left-to-right narrative.
+- Style anchor: "clean modern flat vector illustration, geometric, minimal, no gradients, no photorealism" — concrete medium/technique, not "nice style".
+- Constraints (must-match, stated up front): single main trunk line; small short-lived branches merging back in; flat style; blue accent color (specify a hex family, e.g. #2563EB); aspect ratio 1200x630 (≈1.9:1); NO text baked in (per skill: text in images is unreliable — overlay title in code).
+
+--- 2. Camera-brief prompt (subject → action → setting → style → light → composition) ---
+
+"Flat vector illustration, wide 1200x630 hero composition. A single bold horizontal main branch (a thick dark-navy line) runs left to right across the full width, representing the trunk. Three small short-lived branches (thin lines) split off upward from the trunk at staggered points, each extending briefly then curving back down to rejoin the trunk, suggesting merge commits. Each short branch carries a small simple geometric node (a filled circle) at its tip where it reconnects. Clean modern flat design, geometric shapes, minimal detail, no gradients, no texture, no photorealism. Single blue accent color (#2563EB) used for the short branches and merge nodes against a near-white background (#FAFAFA) with the trunk in dark slate (#1E293B). Soft, even, shadowless flat lighting — no directional light source, uniform fill. Composition: trunk centered vertically, branches distributed evenly along the horizontal axis with balanced spacing, generous negative space top and bottom for a headline overlay. No text, no labels, no logos, no watermarks."
+
+--- 3. Inspection plan (what I would do if a tool existed) ---
+Per skill rule 1 (inspect every output before delivering), I would:
+1. Generate at 1200x630 (or generate larger and downscale to avoid upscaling artifacts).
+2. Run describe_image on the output and check the constraint list: (a) exactly one main trunk line, (b) 3 short branches each merging back in (not dead-ending), (c) merge nodes present, (d) blue accent #2563EB present, (e) flat/no-gradient style held, (f) no garbled text/watermarks.
+3. Check aspect ratio is 1200x630.
+4. Iterate one variable at a time if any constraint fails (e.g. if a branch dead-ends, re-prompt only the branch-merge behavior).
+
+--- 4. Known flaws (honest) ---
+- Cannot verify actual output in this env — prompt is unvalidated against a real generator.
+- Flat geometric style with exact hex colors is only approximate in most generators; exact brand color may drift.
+- Branch count/merge geometry may not be exact on first pass; would need the inspection loop.
+- No text baked in by design (title overlaid in code).
+
+--- 5. Final prompt (reported for reuse) ---
+[The camera-brief prompt in section 2 above.]

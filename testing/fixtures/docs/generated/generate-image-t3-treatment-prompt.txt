@@ -1,0 +1,27 @@
+T3 TREATMENT (skill: generate-image loaded) — iteration discipline (one variable per iteration)
+
+Task: "The hero image feels too cold — make it warmer and tighten the crop on the branch merge point."
+
+--- ORIGINAL PROMPT (from T1, the accepted baseline prompt) ---
+"Flat vector illustration, wide 1200x630 hero composition. A single bold horizontal main branch (a thick dark-navy line) runs left to right across the full width, representing the trunk. Three small short-lived branches (thin lines) split off upward from the trunk at staggered points, each extending briefly then curving back down to rejoin the trunk, suggesting merge commits. Each short branch carries a small simple geometric node (a filled circle) at its tip where it reconnects. Clean modern flat design, geometric shapes, minimal detail, no gradients, no texture, no photorealism. Single blue accent color (#2563EB) used for the short branches and merge nodes against a near-white background (#FAFAFA) with the trunk in dark slate (#1E293B). Soft, even, shadowless flat lighting — no directional light source, uniform fill. Composition: trunk centered vertically, branches distributed evenly along the horizontal axis with balanced spacing, generous negative space top and bottom for a headline overlay. No text, no labels, no logos, no watermarks."
+
+--- ITERATION RULE (per skill rule 2: ONE VARIABLE PER ITERATION) ---
+The feedback names exactly TWO variables: (1) warmth, (2) crop. Per the skill, I change ONLY these two and preserve everything else verbatim. I do NOT regenerate wholesale, do NOT restyle, do NOT change subject, style, colors, or composition logic beyond the crop. I state which variables are FIXED vs CHANGED.
+
+FIXED (unchanged, verbatim from original): subject (single trunk + 3 short merging branches + merge nodes), style (clean modern flat, geometric, no gradients/texture/photorealism), accent color (#2563EB), trunk color (#1E293B), no-text constraint, branch count and merge behavior.
+
+CHANGED (exactly the two requested):
+1. WARMTH — lighting/color-temperature variable only: shift the background from cool near-white to a warm off-white, and warm the accent slightly. This is a lighting/color-temperature edit, not a restyle.
+2. CROP — composition variable only: tighten the frame to focus on the branch merge point (the right-center area where branches rejoin the trunk), reducing the negative space and re-centering on the merge cluster. Aspect ratio stays 1200x630.
+
+--- REVISED PROMPT (minimal diff — only warmth + crop changed) ---
+"Flat vector illustration, wide 1200x630 hero composition. A single bold horizontal main branch (a thick dark-navy line) runs left to right across the full width, representing the trunk. Three small short-lived branches (thin lines) split off upward from the trunk at staggered points, each extending briefly then curving back down to rejoin the trunk, suggesting merge commits. Each short branch carries a small simple geometric node (a filled circle) at its tip where it reconnects. Clean modern flat design, geometric shapes, minimal detail, no gradients, no texture, no photorealism. Single blue accent color (#2563EB) used for the short branches and merge nodes against a WARM off-white background (#FDF6EC) with the trunk in dark slate (#1E293B). Warm, soft, even, shadowless flat lighting — gentle warm color temperature, no directional light source, uniform fill. Composition: TIGHTENED CROP centered on the branch merge point (the cluster where the short branches rejoin the trunk, right-of-center), the merge nodes and reconnection points fill the frame, reduced negative space top and bottom, aspect ratio still 1200x630. No text, no labels, no logos, no watermarks."
+
+--- ONE-ITERATION EXPLANATION (per skill: not a shotgun of variations) ---
+This is a single hypothesis: "warmer color temperature + tighter crop on the merge point." If the result is still too cold, the NEXT iteration changes ONLY temperature again (e.g. warmer background hex, or a warm accent shift) — one variable, one hypothesis per round. I am not proposing 3 alternative warmths or 3 crop options; I changed exactly the two named variables and will evaluate this one output before any further change.
+
+--- KNOWN FLAWS (restated, honest) ---
+- Same as T1: no image generator in this env, so the revised prompt is unvalidated against a real render.
+- Warmth is approximated by a background hex shift (#FAFAFA → #FDF6EC) and a "warm color temperature" phrase; exact warmth is subjective and would need visual inspection.
+- Tightening the crop may push the merge cluster off the 1200x630 frame if the original composition placed it too far right; would verify with describe_image and adjust crop offset (one variable) if needed.
+- No text baked in by design.

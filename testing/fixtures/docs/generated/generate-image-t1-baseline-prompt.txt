@@ -1,0 +1,11 @@
+T1 BASELINE (no skill loaded) — raw response to task:
+
+Task: "An illustration for the engineering blog post about trunk-based development: a single main branch with small short-lived branches merging in, clean modern flat style, blue accent color, suitable for a hero image 1200x630."
+
+--- baseline response ---
+
+Here's a prompt for the hero image:
+
+"Create an illustration of trunk-based development. Show a single main horizontal branch (a line) with several small branches that split off briefly and merge back in. Use a clean modern flat design style with a blue accent color. Make it 1200x630 pixels for a hero image."
+
+I'll generate that and check it looks right before sending.
