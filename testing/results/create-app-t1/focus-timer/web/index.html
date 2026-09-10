@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Focus Timer</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 480px; margin: 2rem auto; padding: 0 1rem; text-align: center; }
+  .timer { font-size: 4rem; font-weight: 700; margin: 1rem 0; font-variant-numeric: tabular-nums; }
+  button { font-size: 1.1rem; padding: .6rem 1.4rem; margin: .25rem; border-radius: 8px; border: 1px solid #ccc; cursor: pointer; }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+  .status { margin: 1rem 0; color: #555; }
+  .total { margin-top: 1.5rem; padding: 1rem; background: #f4f4f4; border-radius: 8px; }
+</style>
+</head>
+<body>
+  <h1>Focus Timer</h1>
+  <div class="timer" id="timer">25:00</div>
+  <div>
+    <button id="startBtn">Start</button>
+    <button id="stopBtn" disabled>Stop</button>
+  </div>
+  <div class="status" id="status">Ready. Click Start to begin a 25-minute focus session.</div>
+  <div class="total">
+    <strong>Today's total focus time:</strong> <span id="todayTotal">—</span>
+  </div>
+
+  <script>
+    // Static JS timer in the browser; sessions are persisted via backend actions.
+    const FOCUS_MINUTES = 25;
+    let secondsLeft = FOCUS_MINUTES * 60;
+    let running = false;
+    let interval = null;
+
+    const timerEl = document.getElementById('timer');
+    const statusEl = document.getElementById('status');
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const todayTotalEl = document.getElementById('todayTotal');
+
+    function render() {
+      const m = String(Math.floor(secondsLeft / 60)).padStart(2, '0');
+      const s = String(secondsLeft % 60).padStart(2, '0');
+      timerEl.textContent = `${m}:${s}`;
+    }
+
+    function refreshTodayTotal() {
+      window.omnideck.invoke('get_today_total', {})
+        .then((res) => {
+          if (res && res.ok) {
+            todayTotalEl.textContent = `${res.total_minutes} min (${res.session_count} sessions)`;
+          }
+        })
+        .catch((err) => {
+          todayTotalEl.textContent = 'unavailable';
+          console.error(err);
+        });
+    }
+
+    startBtn.addEventListener('click', () => {
+      if (running) return;
+      running = true;
+      startBtn.disabled = true;
+      stopBtn.disabled = false;
+      statusEl.textContent = 'Focusing...';
+      interval = setInterval(() => {
+        secondsLeft -= 1;
+        render();
+        if (secondsLeft <= 0) {
+          clearInterval(interval);
+          running = false;
+          startBtn.disabled = false;
+          stopBtn.disabled = true;
+          statusEl.textContent = 'Session complete! Logging...';
+          // Persist the completed session via the backend action.
+          window.omnideck.invoke('log_session', { duration_minutes: FOCUS_MINUTES })
+            .then(() => {
+              statusEl.textContent = 'Session logged. Great work!';
+              refreshTodayTotal();
+            })
+            .catch((err) => {
+              statusEl.textContent = 'Session done, but logging failed.';
+              console.error(err);
+            });
+          secondsLeft = FOCUS_MINUTES * 60;
+          render();
+        }
+      }, 1000);
+    });
+
+    stopBtn.addEventListener('click', () => {
+      clearInterval(interval);
+      running = false;
+      startBtn.disabled = false;
+      stopBtn.disabled = true;
+      statusEl.textContent = 'Stopped early. Session not logged.';
+      secondsLeft = FOCUS_MINUTES * 60;
+      render();
+    });
+
+    render();
+    refreshTodayTotal();
+  </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Broken App</title></head>
+<body>
+<h1>Broken App</h1>
+<button id="btn">Say hello</button>
+<div id="out"></div>
+<script>
+  document.getElementById('btn').addEventListener('click', () => {
+    window.omnideck.invoke('get_message', { name: 'Omnideck' })
+      .then((res) => { document.getElementById('out').textContent = res.message; })
+      .catch((err) => { document.getElementById('out').textContent = 'error: ' + err; });
+  });
+</script>
+</body>
+</html>
