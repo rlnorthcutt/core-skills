@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inventory Service — Architecture</title>
+<style>
+  body { font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; background:#fafafa; color:#222; margin:0; padding:20px; }
+  h1 { font-size:20px; margin:0 0 4px; }
+  .why { font-size:13px; color:#555; max-width:760px; line-height:1.5; margin:0 0 16px; }
+  .why b { color:#222; }
+  svg { background:#fff; border:1px solid #e0e0e0; border-radius:8px; }
+  .box { fill:#eef4fb; stroke:#0072B2; stroke-width:1.5; rx:6; }
+  .box-title { font-weight:700; fill:#222; }
+  .box-sub { font-size:11px; fill:#555; }
+  .edge { stroke:#999; stroke-width:1.5; }
+  .edge-label { font-size:11px; fill:#666; }
+</style>
+</head>
+<body>
+<h1>Inventory Service — Architecture</h1>
+<p class="why">
+  <b>Why static:</b> this question asks <i>what the system looks like</i> (structure: modules, data flow, test surface),
+  not <i>what it does under changing parameters</i>. There is no mechanism to explore, so interactivity would add friction
+  without insight. A static diagram answers it at a glance.
+</p>
+<svg width="820" height="360" viewBox="0 0 820 360">
+  <!-- models.py -->
+  <rect class="box" x="30" y="30" width="200" height="90"/>
+  <text class="box-title" x="130" y="60" text-anchor="middle">models.py</text>
+  <text class="box-sub" x="130" y="80" text-anchor="middle">Item (sku, name, qty,</text>
+  <text class="box-sub" x="130" y="95" text-anchor="middle">reorder_point, tags)</text>
+  <text class="box-sub" x="130" y="110" text-anchor="middle">Order (order_id, items, status)</text>
+
+  <!-- service.py -->
+  <rect class="box" x="310" y="30" width="240" height="90"/>
+  <text class="box-title" x="430" y="60" text-anchor="middle">service.py</text>
+  <text class="box-sub" x="430" y="80" text-anchor="middle">InventoryService</text>
+  <text class="box-sub" x="430" y="95" text-anchor="middle">add/restock/fulfill/low-stock</text>
+  <text class="box-sub" x="430" y="110" text-anchor="middle">stale/bulk/avg-stock</text>
+
+  <!-- test_service.py -->
+  <rect class="box" x="630" y="30" width="160" height="90"/>
+  <text class="box-title" x="710" y="60" text-anchor="middle">test_service.py</text>
+  <text class="box-sub" x="710" y="80" text-anchor="middle">7 unit tests</text>
+  <text class="box-sub" x="710" y="95" text-anchor="middle">(pytest)</text>
+
+  <!-- edges -->
+  <line class="edge" x1="230" y1="75" x2="310" y2="75"/>
+  <text class="edge-label" x="270" y="68" text-anchor="middle">imports</text>
+  <line class="edge" x1="550" y1="75" x2="630" y2="75"/>
+  <text class="edge-label" x="590" y="68" text-anchor="middle">imports</text>
+
+  <!-- data flow -->
+  <rect class="box" x="310" y="200" width="240" height="70"/>
+  <text class="box-title" x="430" y="228" text-anchor="middle">State (in-memory)</text>
+  <text class="box-sub" x="430" y="248" text-anchor="middle">items: dict[sku→Item]</text>
+  <text class="box-sub" x="430" y="263" text-anchor="middle">orders: list[Order]</text>
+  <line class="edge" x1="430" y1="120" x2="430" y2="200" stroke-dasharray="4,3"/>
+  <text class="edge-label" x="440" y="165">holds</text>
+
+  <!-- CLI / external -->
+  <rect class="box" x="30" y="200" width="200" height="70"/>
+  <text class="box-title" x="130" y="228" text-anchor="middle">Callers / CLI</text>
+  <text class="box-sub" x="130" y="248" text-anchor="middle">add_item, restock,</text>
+  <text class="box-sub" x="130" y="263" text-anchor="middle">fulfill, reports</text>
+  <line class="edge" x1="230" y1="235" x2="310" y2="235"/>
+  <text class="edge-label" x="270" y="228" text-anchor="middle">invokes</text>
+</svg>
+</body>
+</html>

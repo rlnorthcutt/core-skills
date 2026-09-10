@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Queue Sim</title></head>
+<body>
+<h1>Queue Simulation</h1>
+<p>Arrival rate (lambda): <input type="range" id="lam" min="1" max="10" value="5"></p>
+<p>Service rate (mu): <input type="range" id="mu" min="1" max="10" value="5"></p>
+<canvas id="c" width="600" height="300"></canvas>
+<script>
+var lam=5, mu=5;
+document.getElementById('lam').oninput=function(e){lam=+e.target.value; run();};
+document.getElementById('mu').oninput=function(e){mu=+e.target.value; run();};
+function run(){
+  var cv=document.getElementById('c'); var g=cv.getContext('2d');
+  g.fillStyle='#fff'; g.fillRect(0,0,600,300);
+  g.fillStyle='#000';
+  var q=0; var t=0; var dt=0.1;
+  var pts=[];
+  for(var i=0;i<500;i++){
+    if(Math.random()<lam*dt) q++;
+    if(q>0 && Math.random()<mu*dt) q--;
+    pts.push(q);
+  }
+  g.strokeStyle='#00f';
+  g.beginPath();
+  for(var i=0;i<pts.length;i++){var x=i*600/500; var y=300-pts[i]*10; if(i==0)g.moveTo(x,y); else g.lineTo(x,y);}
+  g.stroke();
+}
+run();
+</script>
+</body>
+</html>

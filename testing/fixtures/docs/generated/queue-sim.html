@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>M/M/1 Queue Simulator</title>
+<style>
+  :root { --accent:#0072B2; --grey:#6c757d; --bg:#fafafa; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:#222; }
+  #app { max-width:960px; margin:0 auto; padding:16px; }
+  h1 { font-size:20px; margin:0 0 4px; }
+  .model { font-size:13px; color:var(--grey); margin:0 0 12px; line-height:1.5; }
+  .model b { color:#222; }
+  .panel { background:#fff; border:1px solid #e0e0e0; border-radius:8px; padding:12px 14px; margin-bottom:12px; }
+  .row { display:flex; flex-wrap:wrap; gap:18px; align-items:center; }
+  .ctrl { flex:1; min-width:220px; }
+  .ctrl label { display:block; font-size:13px; margin-bottom:2px; }
+  .ctrl .val { font-weight:600; color:var(--accent); }
+  .ctrl input[type=range] { width:100%; }
+  .presets { display:flex; gap:8px; flex-wrap:wrap; }
+  button { padding:6px 12px; border:1px solid #ccc; border-radius:6px; background:#fff; cursor:pointer; font-size:13px; }
+  button:hover { background:#f0f0f0; }
+  button.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+  .counters { display:flex; gap:24px; flex-wrap:wrap; }
+  .counter .k { font-size:12px; color:var(--grey); }
+  .counter .v { font-size:22px; font-weight:700; }
+  .counter .v.rho { color:var(--accent); }
+  .chart-wrap { position:relative; }
+  canvas { width:100%; height:auto; display:block; background:#fff; border:1px solid #e0e0e0; border-radius:6px; }
+  .note { font-size:12px; color:var(--grey); margin-top:6px; }
+  .seed { display:flex; align-items:center; gap:8px; font-size:13px; }
+  .seed input { width:90px; padding:3px 6px; border:1px solid #ccc; border-radius:4px; }
+</style>
+</head>
+<body>
+<div id="app">
+  <h1>M/M/1 Queue Simulator</h1>
+  <p class="model">
+    <b>Model:</b> M/M/1 queue — Poisson arrivals at rate <b>&lambda;</b> and exponential service at rate <b>&mu;</b>.
+    Utilization <b>&rho; = &lambda;/&mu;</b>. As &rho; &rarr; 1, average wait W = 1/(&mu;&minus;&lambda;) explodes.
+    <b>Watch &rho; approach 1 and the wait time diverge.</b>
+  </p>
+
+  <div class="panel">
+    <div class="row">
+      <div class="ctrl">
+        <label>Arrival rate &lambda; (customers/time): <span class="val" id="lamVal">0.7</span></label>
+        <input type="range" id="lam" min="0.1" max="1.5" step="0.05" value="0.7">
+      </div>
+      <div class="ctrl">
+        <label>Service rate &mu; (customers/time): <span class="val" id="muVal">1.0</span></label>
+        <input type="range" id="mu" min="0.1" max="1.5" step="0.05" value="1.0">
+      </div>
+    </div>
+    <div class="presets">
+      <button id="presetStable">Stable (&rho;=0.7)</button>
+      <button id="presetNear">Near-critical (&rho;=0.95)</button>
+      <button id="presetOver">Overloaded (&rho;=1.1)</button>
+    </div>
+    <div class="seed">
+      <label for="seed">Random seed:</label>
+      <input type="number" id="seed" value="42" min="0" step="1">
+      <span class="note">Deterministic option — same seed reproduces the same run.</span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="counters">
+      <div class="counter"><div class="k">Utilization &rho; = &lambda;/&mu;</div><div class="v rho" id="rhoVal">0.70</div></div>
+      <div class="counter"><div class="k">Avg queue length L<sub>q</sub></div><div class="v" id="lqVal">0.00</div></div>
+      <div class="counter"><div class="k">Avg wait W (theory)</div><div class="v" id="wVal">0.00</div></div>
+      <div class="counter"><div class="k">Avg wait W (sim)</div><div class="v" id="wSimVal">0.00</div></div>
+    </div>
+  </div>
+
+  <div class="panel chart-wrap">
+    <canvas id="queueChart" width="920" height="300"></canvas>
+    <div class="note">Queue length over time (simulated). Blue = queue length; red dashed = theoretical mean L<sub>q</sub>.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var canvas = document.getElementById('queueChart');
+  var ctx = canvas.getContext('2d');
+  var lamEl = document.getElementById('lam');
+  var muEl = document.getElementById('mu');
+  var lamValEl = document.getElementById('lamVal');
+  var muValEl = document.getElementById('muVal');
+  var rhoValEl = document.getElementById('rhoVal');
+  var lqValEl = document.getElementById('lqVal');
+  var wValEl = document.getElementById('wVal');
+  var wSimValEl = document.getElementById('wSimVal');
+  var seedEl = document.getElementById('seed');
+
+  // Deterministic PRNG (mulberry32)
+  function mulberry32(a){
+    return function(){
+      a |= 0; a = (a + 0x6D2B79F5) | 0;
+      var t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  var lam = 0.7, mu = 1.0;
+
+  function setRates(l, m){
+    lam = l; mu = m;
+    lamEl.value = l; muEl.value = m;
+    lamValEl.textContent = l.toFixed(2);
+    muValEl.textContent = m.toFixed(2);
+    update();
+  }
+
+  function update(){
+    var rho = lam / mu;
+    rhoValEl.textContent = rho.toFixed(3);
+    // M/M/1 theory (stable regime)
+    var lq = (rho < 1) ? (rho*rho)/(1-rho) : Infinity;
+    var w = (rho < 1) ? 1/(mu-lam) : Infinity;
+    lqValEl.textContent = isFinite(lq) ? lq.toFixed(2) : '\u221E';
+    wValEl.textContent = isFinite(w) ? w.toFixed(2) : '\u221E';
+    simulate();
+  }
+
+  function simulate(){
+    var seed = parseInt(seedEl.value, 10);
+    if (isNaN(seed)) seed = 42;
+    var rnd = mulberry32(seed);
+    var T = 400, dt = 0.05, steps = Math.round(T/dt);
+    var q = 0, totalQ = 0, served = 0, totalWait = 0;
+    var pts = new Array(steps);
+    var maxQ = 0;
+    for (var i = 0; i < steps; i++){
+      // Poisson arrival in dt
+      if (rnd() < lam*dt) q++;
+      // exponential service in dt
+      if (q > 0 && rnd() < mu*dt){ q--; served++; }
+      totalQ += q;
+      if (q > maxQ) maxQ = q;
+      pts[i] = q;
+    }
+    var avgQ = totalQ / steps;
+    var wSim = served > 0 ? totalQ / served : 0; // Little's law approx: W = L/λ
+    wSimValEl.textContent = wSim.toFixed(2);
+    draw(pts, avgQ, maxQ);
+  }
+
+  function draw(pts, avgQ, maxQ){
+    var W = canvas.width, H = canvas.height;
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#fff'; ctx.fillRect(0,0,W,H);
+    var yMax = Math.max(10, Math.ceil(maxQ*1.2));
+    var n = pts.length;
+    // grid
+    ctx.strokeStyle = '#eee'; ctx.lineWidth = 1;
+    for (var gy = 0; gy <= yMax; gy += Math.max(1, Math.round(yMax/5))){
+      var yy = H - (gy/yMax)*H;
+      ctx.beginPath(); ctx.moveTo(0,yy); ctx.lineTo(W,yy); ctx.stroke();
+      ctx.fillStyle = '#999'; ctx.font = '11px sans-serif';
+      ctx.fillText(String(gy), 4, yy-3);
+    }
+    // theoretical mean Lq
+    var rho = lam/mu;
+    var lq = rho < 1 ? (rho*rho)/(1-rho) : null;
+    if (lq !== null){
+      ctx.strokeStyle = '#d62728'; ctx.setLineDash([6,4]); ctx.lineWidth = 1.5;
+      var ly = H - (lq/yMax)*H;
+      ctx.beginPath(); ctx.moveTo(0,ly); ctx.lineTo(W,ly); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    // queue length line
+    ctx.strokeStyle = '#0072B2'; ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    for (var i = 0; i < n; i++){
+      var x = (i/(n-1))*W;
+      var y = H - (pts[i]/yMax)*H;
+      if (i === 0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+    // axis label
+    ctx.fillStyle = '#666'; ctx.font = '11px sans-serif';
+    ctx.fillText('time \u2192', W-50, H-4);
+    ctx.fillText('queue length', 4, 12);
+  }
+
+  // wire sliders
+  lamEl.addEventListener('input', function(){ setRates(parseFloat(lamEl.value), mu); });
+  muEl.addEventListener('input', function(){ setRates(lam, parseFloat(muEl.value)); });
+  seedEl.addEventListener('input', function(){ simulate(); });
+
+  // presets set values programmatically
+  document.getElementById('presetStable').addEventListener('click', function(){ setRates(0.7, 1.0); });
+  document.getElementById('presetNear').addEventListener('click', function(){ setRates(0.95, 1.0); });
+  document.getElementById('presetOver').addEventListener('click', function(){ setRates(1.1, 1.0); });
+
+  update();
+})();
+</script>
+</body>
+</html>
