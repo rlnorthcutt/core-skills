@@ -6,8 +6,8 @@
 | 1 | T1 logscan CLI + server | 9/10 | 10/10 | Both built identical working tool + 5 passing tests + verified server; treatment's only edge is extra verify-own-work (edge-case run) per skill's read-before-edit/verify-after-edit discipline |
 
 ## Trigger probes
-- Positive: <pending — separate probe>
-- Negative: <pending — separate probe>
+- Positive: PASS — P4 "write a script to rename photos by EXIF date" loaded write-code (hands-on file-manipulation/coding).
+- Negative: PASS — N4 "caching opinion on current code" did NOT load write-code (analysis/opinion, nothing to build → review-code or none).
 
 ## Observations
 - **Both trials produced functionally identical deliverables:** `logscan.py` (regex parser, total/status-class/top-3-IP stats, `--json`, `--since`), `access.log` (20 lines, a few 404s/500s), `test_logscan.py` (5 tests). Both ran the tool (plain + JSON + since filter) and showed output; both ran pytest and showed `5 passed`; both curled the server and showed HTTP 200 with the directory listing.

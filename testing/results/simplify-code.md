@@ -6,8 +6,8 @@
 | 1 | T1 cleanup pass | 9/10 | 10/10 | Both runs found all 3 seeds, kept 8/8 tests green, preserved behavior, no drive-by changes; treatment's only edge is the skill-mandated written summary (R5) |
 
 ## Trigger probes
-- Positive: <pending — separate probe>
-- Negative: <pending — separate probe>
+- Positive: PASS — P3 "clean up copy-paste code" loaded simplify-code (cleanup, explicitly not bug-hunting).
+- Negative: PASS — N3 "export crash bug, track it down and fix it" did NOT load simplify-code (bug fix → write-code/review-code).
 
 ## Observations
 - **Seeds found — identical in both runs (all 3):**

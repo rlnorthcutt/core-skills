@@ -6,8 +6,8 @@
 | 1 | T1 seeded diff | 10/10 | 10/10 | Both runs found all 3 bugs and avoided the trap; treatment added rigor/structure but no measurable recall/precision gain because the baseline was already strong |
 
 ## Trigger probes
-- Positive: <pending — separate probe>
-- Negative: <pending — separate probe>
+- Positive: PASS — P1 "check payment flow before PR" loaded review-code (correctness review of a change).
+- Negative: PASS — N1 "add --verbose flag" did NOT load review-code (new feature work → write-code); N2 "off-by-one bug hunt" is review-code's job (correctness bug hunt), not review-security.
 
 ## Observations
 - **Both runs found all 3 planted bugs.** Neither run flagged the TOCTOU trap as a race — both explicitly noted the two-loop `fulfill` is correct in a single-threaded, in-memory service.

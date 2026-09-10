@@ -6,8 +6,8 @@
 | 1 | T1 benign diff | 10/10 | 10/10 | Both runs correctly returned "no exploitable findings"; neither invented injection/sanitize issues; both flagged the pre-existing IDOR as out-of-scope hardening |
 
 ## Trigger probes
-- Positive: <pending — separate probe>
-- Negative: <pending — separate probe>
+- Positive: PASS — P2 "security pass on upload endpoint" loaded review-security (input handling/external data trust boundary).
+- Negative: PASS — N2 "off-by-one bug hunt" did NOT load review-security (no auth/input/secrets/external-data angle → review-code/write-code).
 
 ## Observations
 
