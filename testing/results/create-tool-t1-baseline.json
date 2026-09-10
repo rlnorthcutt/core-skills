@@ -1,0 +1,11 @@
+{
+  "name": "convert_timezone_from_logs",
+  "description": "Convert a timestamp to a timezone",
+  "type": "program",
+  "language": "python",
+  "command_template": "",
+  "program_code": "import json, sys\nfrom datetime import datetime, timezone\nfrom zoneinfo import ZoneInfo\nargs = json.load(sys.stdin)\nts = args['timestamp']\n# only handles target tz, no source default\nprint(json.dumps({'converted': datetime.fromisoformat(ts).astimezone(ZoneInfo(args['target_tz'])).isoformat()}))\n",
+  "parameters_json": "[{\"name\": \"timestamp\", \"type\": \"string\", \"description\": \"ISO timestamp\", \"required\": true}, {\"name\": \"target_tz\", \"type\": \"string\", \"description\": \"target timezone\", \"required\": true}]",
+  "dependencies": "",
+  "tags": "timestamp,timezone"
+}

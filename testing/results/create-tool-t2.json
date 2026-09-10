@@ -1,0 +1,11 @@
+{
+  "name": "csv_summary",
+  "description": "Print per-column summary statistics (count, mean, std, min, quartiles, max for numerics; value counts for non-numerics) for a CSV file. A thin wrapper around pandas DataFrame.describe() for a single file path. Use instead of hand-rolling summarize loops.",
+  "type": "command",
+  "language": "",
+  "command_template": "python3 -c \"import pandas as pd, sys; df=pd.read_csv('{csv_path}'); print(df.describe(include='all').to_string()); print('---nullable counts---'); print(df.isnull().sum().to_string())\"",
+  "program_code": "",
+  "parameters_json": "[{\"name\": \"csv_path\", \"type\": \"string\", \"description\": \"Path to the CSV file to summarize.\", \"required\": true}]",
+  "dependencies": "pandas",
+  "tags": "csv,stats,summary,data"
+}

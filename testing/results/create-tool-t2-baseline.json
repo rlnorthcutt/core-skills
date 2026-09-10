@@ -1,0 +1,11 @@
+{
+  "name": "csv_stats",
+  "description": "Prints summary statistics for each column of a CSV file",
+  "type": "program",
+  "language": "python",
+  "command_template": "",
+  "program_code": "import json, sys, csv\nfrom collections import Counter\nargs = json.load(sys.stdin)\npath = args['path']\nrows = list(csv.DictReader(open(path)))\ncols = rows[0].keys()\nstats = {}\nfor col in cols:\n    vals = [r[col] for r in rows]\n    stats[col] = {'count': len(vals), 'sample': vals[:3]}\nprint(json.dumps({'stats': stats}))\n",
+  "parameters_json": "[{\"name\": \"path\", \"type\": \"string\", \"description\": \"path to CSV\", \"required\": true}]",
+  "dependencies": "",
+  "tags": "csv,stats"
+}
