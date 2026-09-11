@@ -1,0 +1,230 @@
+TODO — Remaining Skills to Create/Review
+=========================================
+Updated: 2026-09-11
+
+COMPLETED SKILLS (24 in catalog)
+--------------------------------
+[x] review-code         tested 10/10  (structural value: trap-check discipline)
+[x] review-security     tested 10/10  (structural value: honest clean verdicts)
+[x] simplify-code       tested 10/9   (edge: mandated summary + flag-don't-apply)
+[x] write-code          tested 10/9   (edge: error-path verification; Popen fallback)
+[x] write-drafts        tested 10/8   (edge: purpose-first, no filler)
+[x] humanize-text       tested 10/8   (edge: full tell-set removal + restraint)
+[x] personal-context    tested 10/4   (edge: memory retrieval, no fabrication)
+[x] resolve-recipient   tested 10/2.7 (edge: no mis-send, no over-ask, UNRESOLVED groups)
+[x] improve             tested 10/0.5 (20x: capability creation)
+[x] create-skill        tested 10/2.3 (4.3x: push-back, duplicate detection)
+[x] create-agent        tested 9.5/2  (4.8x: least-privilege)
+[x] create-tool         tested 9.5/2.5(3.8x: existing-tool check)
+[x] create-app          tested 10/0.5 (20x: full lifecycle)
+[x] install-skill       NOT YET TESTED (created 7c3c71b, installed + e2e verified)
+[x] write-docs          tested 10/5   (edge: verified against code, structural drift)
+[x] research            tested 10/2   (5x: hard-stop, no fabrication)
+[x] plan-learning       tested 10/1   (10x: arithmetic-first, scope push-back)
+[x] make-docs           tested 10/6   (edge: render-verify caught H1/H2 defect)
+[x] make-sheets         tested 10/3   (edge: East-over-North trap, dirty data)
+[x] make-slides         tested 10/6   (edge: assertion headlines, speaker notes)
+[x] make-pdfs           tested 10/4.3 (edge: no-text-layer detection, merge verify)
+[x] draw-charts         tested 10/4   (edge: question-matched chart, hygiene pass)
+[x] visualize           tested 10/3.7 (edge: static-vs-interactive judgment)
+[x] generate-image      tested 9.7/2.5(prompt-craft substitution — needs GPU re-trial)
+
+REMAINING SKILLS TO CREATE
+--------------------------
+[P2] design
+     Difficulty: Involved
+     Value: High
+     Source: sources/claude-skills/builtin-skills/design/ (SKILL.full.md has the
+             full ~2000 lines of guidance; SKILL.md is just a pointer)
+     Steps:
+       1. Read SKILL.full.md from sources
+       2. Strip the 2.3MB canvas payload (payload.template.html, seed-canvas.mjs)
+       3. Extract the design-craft guidance (palette, typography, layout)
+       4. Adapt to Omnideck conventions (remove any platform-specific references)
+       5. Create skill.json with tool_categories: [coding]
+       6. Write SKILL.md, validate, install
+     Notes: High value — elevates every app/web artifact Omnideck produces
+
+[P2] install-skill TESTING
+     Difficulty: Easy
+     Value: — (verification, not creation)
+     Steps:
+       1. Design A/B trials (baseline vs install-skill loaded)
+       2. Test: install from git repo, from skills.sh search, from zip, from
+          loose SKILL.md, from omnideck pack
+       3. Test: inspect output (frontmatter validation, script analysis)
+       4. Test: confirm-before-install (does it ask?)
+       5. Test: no-default-source (does it ask when no source given?)
+       6. Test: create-skill handoff (does it offer to create when no source?)
+     Notes: install-skill is already built + e2e verified; needs formal A/B testing
+
+[P3] design-artifact
+     Difficulty: Complex
+     Value: High
+     Depends: visualize (DONE — HTML-deliverable pattern established)
+     Source: sources/claude-skills/builtin-skills/artifact-design/
+     Steps:
+       1. Read artifact-design SKILL.md from sources
+       2. Salvage the design-treatment guidance (how to style an artifact page)
+       3. Re-found on Omnideck's HTML-deliverable pattern (from visualize)
+       4. Adapt conventions, create skill.json + SKILL.md
+     Notes: High value once visualize's pattern is proven (it is now)
+
+[P3] diagram-artifact
+     Difficulty: Complex
+     Value: Medium
+     Depends: visualize (DONE — HTML-deliverable pattern established)
+     Source: sources/claude-skills/builtin-skills/artifact-diagramming/
+     Steps:
+       1. Read artifact-diagramming SKILL.md from sources
+       2. Salvage the mechanism-revealing diagram guidance
+       3. Salvageable as static SVG/HTML generation (no artifact runtime needed)
+       4. Create skill.json + SKILL.md
+     Notes: Medium standalone, high within the artifact family
+
+[P3] quiz-widget
+     Difficulty: Complex
+     Value: Medium
+     Depends: visualize (DONE — HTML-deliverable pattern established)
+     Source: sources/chatgpt-skills/oai/answers-learning/ (quiz widget spec)
+     Steps:
+       1. Read answers-learning SKILL.md from sources
+       2. Strip the ChatGPT genui widget invocation format
+       3. Re-found on standalone HTML (feeds into plan-learning)
+       4. Design the Omnideck-native quiz output format
+     Notes: Nice complement to plan-learning
+
+[P4] improve-memory
+     Difficulty: Complex
+     Value: High
+     Depends: SDK integration (hooks, context manager) — needs Omnideck code work
+     Source: Derived from improve skill's findings
+     Steps:
+       1. Design the cross-session learning model (what gets remembered, when)
+       2. Prototype against Omnideck's memory system (remember/load_memory)
+       3. Determine if SDK changes are needed (hooks on skill load, context injection)
+       4. Create skill or tool depending on scope
+     Notes: The long-term compounding payoff of the self-improvement loop
+
+[P4] claude-api
+     Difficulty: Involved
+     Value: Medium
+     Source: sources/claude-skills/builtin-skills/claude-api/ (1.1MB multi-language
+             reference tree)
+     Steps:
+       1. Condense the 1.1MB reference to a curated prompt (~4000 chars)
+       2. Pick the most useful subset (Python + TypeScript probably)
+       3. Generalize beyond Claude to OpenAI/Gemini if desired
+       4. Create skill.json + SKILL.md
+     Notes: Useful for ecosystem dev, niche for end users
+
+[P4] artifact-capabilities
+     Difficulty: Complex
+     Value: Low (for now)
+     Depends: Omnideck artifact runtime (doesn't exist yet)
+     Source: sources/claude-skills/builtin-skills/artifact-capabilities/
+     Steps:
+       1. Read the SKILL.md from sources
+       2. Design Omnideck's equivalent capability system (db, downloads, mcp…)
+       3. Only relevant if/when Omnideck builds an artifact runtime
+     Notes: Archival/reference for future design; do not port now
+
+[P4] create-plugin
+     Difficulty: Complex
+     Value: Low (for now)
+     Depends: Omnideck pack/marketplace concept (doesn't exist yet)
+     Source: sources/chatgpt-skills/.system/plugin-creator/
+     Steps:
+       1. Read plugin-creator SKILL.md from sources
+       2. Design Omnideck's equivalent: pack format for sharing skills+apps+profiles
+       3. May overlap with the existing omnideck pack format
+     Notes: Interesting later for distribution
+
+TODO — TESTING PROGRAM
+-----------------------
+[P1] Cross-model replication
+     Currently: all 23 skills tested on deepseek-v4-flash only
+     Risk: craft-tier results (review-code/review-security 10v10) are
+           fixture-and-model dependent — a weaker baseline model would
+           likely show gaps
+     Steps:
+       1. Pick 2-3 alternative models (e.g. a different provider/size class)
+       2. Re-run the A/B trials for at least the review trio (review-code,
+          review-security, simplify-code) and the creator family
+       3. Compare: does the skill's marginal value hold across models?
+       4. If craft-tier skills show real gaps on weaker models, upgrade their
+          value assessment
+     Notes: This is the single most valuable follow-up for confidence in the
+            catalog
+
+[P2] Full catalog cross-model testing
+     Steps:
+       1. Set up testing infrastructure to run A/B trials against multiple models
+       2. Run all 24 skills against 2-3 models
+       3. Aggregate into a model-comparison matrix (which skills hold across
+          models, which are model-specific)
+       4. Update REPORT.md with cross-model findings
+     Notes: Extends the cross-model replication to the full catalog
+
+[P2] install-skill formal testing
+     See the install-skill TESTING entry above
+
+[P2] visualize interactive-drag verification
+     Currently: render verified (headless Chrome), presets verified via
+                sim-math re-execution
+     Remaining: drive the UI with Playwright to verify slider→output wiring
+     Steps:
+       1. Install Playwright (pip install playwright; playwright install chromium)
+       2. Load the queue-sim.html, drag sliders, verify output changes
+       3. Test presets programmatically
+     Notes: Closes the last verification gap on visualize
+
+[P3] Long-horizon personal-context test
+     Currently: seeded memory, single-session
+     Remaining: memory decay, staleness conflicts, organic accumulation
+     Steps:
+       1. Use personal-context across multiple real sessions over days/weeks
+       2. Track: does it retrieve the right context? does it handle stale
+          preferences? does it save new facts correctly?
+     Notes: Needs real usage over time, not synthetic
+
+[P3] generate-image re-trial with real generator
+     Currently: prompt-craft substitution (no image generator in this env)
+     Blocked: needs GPU + HF_TOKEN + ENABLE_IMAGE_GEN=1
+     Steps:
+       1. Set up an environment with image generation enabled
+       2. Re-run the 3 trials (spec'd generation, wrong-tool probe, iteration)
+       3. Compare actual image output quality vs prompt-craft score
+     Notes: Also unblocks the Image Generator agent profile (currently
+            half-configured, chat-only)
+
+DONE — COMPLETED MILESTONES
+----------------------------
+[x] Initial catalog: 7 Wave 1 skills (a1dac16)
+[x] Verb-first rename pass (9ccf7b2)
+[x] Creator suite: improve, create-skill/agent/tool/app (3e5486d)
+[x] Office suite + media + research + learning (3e5486d)
+[x] write-code added as coder replacement (aa92ecb)
+[x] Testing plan with per-skill rubrics (a59b5f0)
+[x] All 23 original skills tested ALL PASS (5cd4fb4)
+[x] generate-image tested (prompt-craft substitution) (7c05c5d)
+[x] Portfolio REPORT.md (1010e0b)
+[x] All 7 refinements applied (1010e0b)
+[x] Refinement retest 7/7 PASS (d76d8ca)
+[x] Visualize browser render verification (5d08232)
+[x] install-skill created + e2e tested (7c3c71b)
+
+KNOWN BUGS / ENVIRONMENT ISSUES
+-------------------------------
+[BUG] wiki-builder.json pack-wrapped format silently skipped by _load_all
+      Only 29/30 records load from /var/lib/omnideck/skills/
+      Fix: unwrap the {'skill': {...}} wrapper to a direct SkillRecord
+      File as omnideck bug
+
+[ENV] pandas NOT preinstalled (despite skill assumptions)
+[ENV] matplotlib NOT preinstalled (draw-charts installs it on demand)
+[ENV] shell & (background operator) BLOCKED by execution policy
+      → write-code skill now documents Popen fallback
+[ENV] no node/tesseract/image-generation tooling
+[ENV] no GPU, no HF_TOKEN — blocks generate-image real testing
+      and the Image Generator agent profile (chat-only, half-configured)

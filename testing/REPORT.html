@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>core-skills — Test Results Report</title>
+<style>
+  :root{
+    --bg:#0e1116; --panel:#161b22; --panel2:#1c2128; --line:#2d333b;
+    --text:#e6edf3; --muted:#8b949e; --accent:#58a6ff;
+    --pass:#3fb950; --warn:#d29922; --fail:#f85149;
+    --cap:#bc8cff; --disc:#58a6ff; --craft:#7ee787;
+    --na:#484f58;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6;padding:40px 24px 100px}
+  .wrap{max-width:1140px;margin:0 auto}
+  h1{font-size:2rem;margin-bottom:4px}
+  .sub{color:var(--muted);margin-bottom:28px}
+  h2{font-size:1.3rem;margin:44px 0 10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0 36px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;text-align:center}
+  .stat .n{font-size:1.8rem;font-weight:700}
+  .stat .l{font-size:.8rem;color:var(--muted)}
+  table{width:100%;border-collapse:collapse;font-size:.87rem;margin:14px 0}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;font-size:.76rem;text-transform:uppercase;letter-spacing:.04em}
+  .bar{display:inline-block;height:14px;border-radius:3px;vertical-align:middle;min-width:2px}
+  .bar-base{background:var(--na)}
+  .bar-treat{background:var(--accent)}
+  .tier{font-size:.68rem;font-weight:600;padding:2px 8px;border-radius:99px;letter-spacing:.03em;text-transform:uppercase;border:1px solid}
+  .cap{color:var(--cap);border-color:var(--cap);background:rgba(188,140,255,.08)}
+  .disc{color:var(--disc);border-color:var(--disc);background:rgba(88,166,255,.08)}
+  .craft{color:var(--craft);border-color:var(--craft);background:rgba(126,231,135,.08)}
+  .pass{color:var(--pass)}
+  .mono{font-family:ui-monospace,monospace;font-size:.82rem}
+  .note{background:var(--panel2);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 8px 8px 0;font-size:.88rem;color:var(--muted);margin:12px 0}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+  .card h3{font-size:.95rem;margin-bottom:4px}
+  .card p{font-size:.83rem;color:var(--muted);margin-bottom:6px}
+  .tag{font-size:.68rem;font-weight:600;padding:2px 8px;border-radius:99px;letter-spacing:.03em;text-transform:uppercase;border:1px solid;display:inline-block;margin-right:4px;margin-bottom:4px}
+  .p2{color:var(--warn);border-color:var(--warn);background:rgba(210,153,34,.08)}
+  .p3{color:var(--accent);border-color:var(--accent);background:rgba(88,166,255,.08)}
+  .p4{color:var(--muted);border-color:var(--muted);background:rgba(139,148,158,.08)}
+  .inv{color:var(--warn);border-color:var(--warn)}
+  .cx{color:var(--fail);border-color:var(--fail)}
+  .done{color:var(--pass);border-color:var(--pass)}
+  .finding{margin:8px 0;padding:10px 14px;background:var(--panel2);border-radius:8px;border-left:3px solid var(--warn);font-size:.86rem}
+  .finding b{color:var(--text)}
+  .finding .skill{color:var(--accent);font-family:ui-monospace,monospace;font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>core-skills — Test Results Report</h1>
+<div class="sub">A/B trial results for all catalog skills · deepseek-v4-flash via code_expert/research_agent profiles · 2026-09-09 → 2026-09-11 · commits a1dac16 → 7c3c71b</div>
+
+<div class="stats">
+  <div class="stat"><div class="n" style="color:var(--pass)">23/23</div><div class="l">skills PASS</div></div>
+  <div class="stat"><div class="n" style="color:var(--pass)">26/26</div><div class="l">trigger probes</div></div>
+  <div class="stat"><div class="n" style="color:var(--warn)">7</div><div class="l">refinements → retested 7/7</div></div>
+  <div class="stat"><div class="n">24</div><div class="l">skills in catalog</div></div>
+</div>
+
+<h2>Marginal value by skill</h2>
+<p class="sub">Treatment (skill loaded) vs baseline (no skill), averaged across all trials. The bar shows the gap — wider = more value from loading the skill.</p>
+
+<table>
+<tr><th>Skill</th><th>Tier</th><th>Baseline</th><th>Treatment</th><th>Ratio</th><th>Visual</th></tr>
+<tr><td class="mono">improve</td><td><span class="tier cap">Capability</span></td><td>0.5</td><td>10.0</td><td>20×</td><td><span class="bar bar-base" style="width:5px"></span> <span class="bar bar-treat" style="width:200px"></span></td></tr>
+<tr><td class="mono">create-app</td><td><span class="tier cap">Capability</span></td><td>0.5</td><td>10.0</td><td>20×</td><td><span class="bar bar-base" style="width:5px"></span> <span class="bar bar-treat" style="width:200px"></span></td></tr>
+<tr><td class="mono">plan-learning</td><td><span class="tier cap">Capability</span></td><td>1.0</td><td>10.0</td><td>10×</td><td><span class="bar bar-base" style="width:10px"></span> <span class="bar bar-treat" style="width:200px"></span></td></tr>
+<tr><td class="mono">research</td><td><span class="tier disc">Discipline</span></td><td>2.0</td><td>10.0</td><td>5×</td><td><span class="bar bar-base" style="width:20px"></span> <span class="bar bar-treat" style="width:200px"></span></td></tr>
+<tr><td class="mono">create-agent</td><td><span class="tier disc">Discipline</span></td><td>2.0</td><td>9.5</td><td>4.8×</td><td><span class="bar bar-base" style="width:20px"></span> <span class="bar bar-treat" style="width:190px"></span></td></tr>
+<tr><td class="mono">create-skill</td><td><span class="tier disc">Discipline</span></td><td>2.3</td><td>10.0</td><td>4.3×</td><td><span class="bar bar-base" style="width:23px"></span> <span class="bar bar-treat" style="width:200px"></span></td></tr>
+<tr><td class="mono">resolve-recipient</td><td><span class="tier disc">Discipline</span></td><td>2.7</td><td>10.0</td><td>3.8×</td><td><span class="bar bar-base" style="width:27px"></span> <span class="bar bar-treat" style="width:200px"></span></td></tr>
+<tr><td class="mono">create-tool</td><td><span class="tier disc">Discipline</span></td><td>2.5</td><td>9.5</td><td>3.8×</td><td><span class="bar bar-base" style="width:25px"></span> <span class="bar bar-treat" style="width:190px"></span></td></tr>
+<tr><td class="mono">generate-image</td><td><span class="tier disc">Discipline</span></td><td>2.5</td><td>9.7</td><td>3.9×</td><td><span class="bar bar-base" style="width:25px"></span> <span class="bar bar-treat" style="width:194px"></span></td></tr>
+<tr><td class="mono">make-sheets</td><td><span class="tier craft">Craft</span></td><td>3.0</td><td>10.0</td><td>3.3×</td><td><span class="bar bar-base" style="width:30px"></span> <span class="bar bar-treat" style="width:200px"></span></td></tr>
+<tr><td class="mono">visualize</td><td><span class="tier craft">Craft</span></td><td>3.7</td><td>10.0</td><td>2.7×</td><td><span class="bar bar-base" style="width:37px"></span> <span class="bar bar-treat" style="width:200px"></span></td></tr>
+<tr><td class="mono">personal-context</td><td><span class="tier disc">Discipline</span></td><td>4.0</td><td>10.0</td><td>2.5×</td><td><span class="bar bar-base" style="width:40px"></span> <span class="bar bar-treat" style="width:200px"></span></td></tr>
+<tr><td class="mono">draw-charts</td><td><span class="tier craft">Craft</span></td><td>4.0</td><td>10.0</td><td>2.5×</td><td><span class="bar bar-base" style="width:40px"></span> <span class="bar bar-treat" style="width:200px"></span></td></tr>
+<tr><td class="mono">make-pdfs</td><td><span class="tier craft">Craft</span></td><td>4.3</td><td>10.0</td><td>2.3×</td><td><span class="bar bar-base" style="width:43px"></span> <span class="bar bar-treat" style="width:200px"></span></td></tr>
+<tr><td class="mono">write-docs</td><td><span class="tier craft">Craft</span></td><td>5.0</td><td>10.0</td><td>2×</td><td><span class="bar bar-base" style="width:50px"></span> <span class="bar bar-treat" style="width:200px"></span></td></tr>
+<tr><td class="mono">make-docs</td><td><span class="tier craft">Craft</span></td><td>6.0</td><td>10.0</td><td>1.7×</td><td><span class="bar bar-base" style="width:60px"></span> <span class="bar bar-treat" style="width:200px"></span></td></tr>
+<tr><td class="mono">make-slides</td><td><span class="tier craft">Craft</span></td><td>6.0</td><td>10.0</td><td>1.7×</td><td><span class="bar bar-base" style="width:60px"></span> <span class="bar bar-treat" style="width:200px"></span></td></tr>
+<tr><td class="mono">write-drafts</td><td><span class="tier craft">Craft</span></td><td>8.0</td><td>10.0</td><td>1.3×</td><td><span class="bar bar-base" style="width:80px"></span> <span class="bar bar-treat" style="width:200px"></span></td></tr>
+<tr><td class="mono">humanize-text</td><td><span class="tier craft">Craft</span></td><td>8.0</td><td>10.0</td><td>1.3×</td><td><span class="bar bar-base" style="width:80px"></span> <span class="bar bar-treat" style="width:200px"></span></td></tr>
+<tr><td class="mono">simplify-code</td><td><span class="tier craft">Craft</span></td><td>9.0</td><td>10.0</td><td>1.1×</td><td><span class="bar bar-base" style="width:90px"></span> <span class="bar bar-treat" style="width:200px"></span></td></tr>
+<tr><td class="mono">write-code</td><td><span class="tier craft">Craft</span></td><td>9.0</td><td>10.0</td><td>1.1×</td><td><span class="bar bar-base" style="width:90px"></span> <span class="bar bar-treat" style="width:200px"></span></td></tr>
+<tr><td class="mono">review-code</td><td><span class="tier craft">Craft</span></td><td>10.0</td><td>10.0</td><td>1×</td><td><span class="bar bar-base" style="width:200px"></span> <span class="bar bar-treat" style="width:200px"></span></td></tr>
+<tr><td class="mono">review-security</td><td><span class="tier craft">Craft</span></td><td>10.0</td><td>10.0</td><td>1×</td><td><span class="bar bar-base" style="width:200px"></span> <span class="bar bar-treat" style="width:200px"></span></td></tr>
+</table>
+
+<div class="note"><b>install-skill</b> — created and e2e tested (git clone → inspect → install → verified in catalog) but not yet formally A/B tested. See TODO.txt for the testing plan.</div>
+
+<h2>The three tiers</h2>
+<div class="grid">
+  <div class="card"><h3 style="color:var(--cap)">Capability Creation</h3>
+    <p>The baseline agent <b>could not do the job at all</b>. These skills create ability where none existed.</p>
+    <p><span class="mono">improve</span> · <span class="mono">create-app</span> · <span class="mono">plan-learning</span></p>
+    <p style="color:var(--cap)">10–20× marginal value</p>
+  </div>
+  <div class="card"><h3 style="color:var(--disc)">Discipline</h3>
+    <p>The baseline <b>acted but acted wrongly</b> — fabricated data, mis-sent mail, shipped sprawl. The skill prevents concrete harm.</p>
+    <p><span class="mono">research</span> · <span class="mono">create-agent</span> · <span class="mono">create-skill</span> · <span class="mono">resolve-recipient</span> · <span class="mono">create-tool</span> · <span class="mono">personal-context</span> · <span class="mono">generate-image</span></p>
+    <p style="color:var(--disc)">2.5–5× marginal value</p>
+  </div>
+  <div class="card"><h3 style="color:var(--craft)">Craft Reinforcement</h3>
+    <p>The baseline was <b>already competent</b>; the skill enforces <i>consistency</i> (trap checks, honest verdicts, render verification) rather than ability.</p>
+    <p><span class="mono">review-code</span> · <span class="mono">review-security</span> · <span class="mono">simplify-code</span> · <span class="mono">write-code</span> · <span class="mono">write-drafts</span> · <span class="mono">humanize-text</span> · <span class="mono">make-docs</span> · <span class="mono">make-slides</span> · <span class="mono">make-sheets</span> · <span class="mono">make-pdfs</span> · <span class="mono">draw-charts</span> · <span class="mono">visualize</span> · <span class="mono">write-docs</span></p>
+    <p style="color:var(--craft)">1–2.7× marginal value</p>
+  </div>
+</div>
+
+<h2>Baseline wrongness — the failures the skills prevent</h2>
+<p class="sub">These aren't quality differences. The baseline produced <b>wrong output with confidence</b>.</p>
+
+<div class="finding"><span class="skill">research</span> — <b>Fabricated revenue</b>: "likely $200K–$400K" for a private project with no public data. Treatment: "no reliable sources found is a valid finding" — refused to estimate.</div>
+<div class="finding"><span class="skill">research</span> — <b>Wrong fact asserted confidently</b>: claimed requests was less maintained than httpx. Live data showed the opposite (4 releases in 2026 vs Dec 2024).</div>
+<div class="finding"><span class="skill">resolve-recipient</span> — <b>Mis-sent to the wrong person</b>: picked the Acme vendor Chris for an internal budget matter ("first in the address book"). Treatment: resolved via thread evidence.</div>
+<div class="finding"><span class="skill">resolve-recipient</span> — <b>Over-asked on a decisive case</b>: "Which Chris?" when "at Acme" + pricing thread was unambiguous. Treatment: proceeded without asking.</div>
+<div class="finding"><span class="skill">create-skill</span> — <b>Shipped a sprawling duplicate</b>: "make a skill for coding" produced a mega-skill overlapping 6 existing skills. Treatment: pushed back, enumerated collisions.</div>
+<div class="finding"><span class="skill">create-agent</span> — <b>Granted everything</b>: "give it everything so it doesn't get stuck" → all 9 skills granted. Treatment: least-privilege, 2 skills, named exclusions.</div>
+<div class="finding"><span class="skill">plan-learning</span> — <b>No arithmetic</b>: produced three parallel schedules for 48 total available hours. Treatment: did the math, forced prioritization.</div>
+<div class="finding"><span class="skill">make-sheets</span> — <b>Silent data loss</b>: dropped a mid-table TOTAL row without noting it. Treatment: flagged in a Notes sheet.</div>
+<div class="finding"><span class="skill">generate-image</span> — <b>Wrong tool</b>: attempted bitmap generation for a 6-icon consistent set. Treatment: routed to SVG with reasoning.</div>
+<div class="finding"><span class="skill">write-docs</span> — <b>Missed structural drift</b>: said "no changes needed" when counts matched, missing CR-22's out-of-order placement. Treatment: found it.</div>
+
+<h2>Cross-cutting weaknesses (baselines)</h2>
+<div class="grid">
+  <div class="card"><h3>1. Baselines don't verify</h3>
+    <p>The most common delta: treatment runs tests/renders/curls before claiming success; baselines claim success from inspection alone. Seen across write-code, make-docs, make-slides, make-pdfs, draw-charts, create-tool, create-app.</p>
+  </div>
+  <div class="card"><h3>2. Baselines don't do arithmetic on scope</h3>
+    <p>When constraints conflict with the request, baselines silently satisfy the request. plan-learning (48 hours), create-agent (least privilege), create-skill (catalog collisions).</p>
+  </div>
+  <div class="card"><h3>3. Baseline writing has AI tells</h3>
+    <p>write-drafts opened with "I hope you're doing well" filler. humanize-text returned AI-patterned text <b>verbatim</b> when asked to naturalize it.</p>
+  </div>
+  <div class="card"><h3>4. Review skills' value is invisible in A/B with strong baselines</h3>
+    <p>review-code and review-security scored 10v10 — the fixture's bugs were findable by careful reading. Their value showed structurally (trap checks, honest verdicts) and would show measurably against a weaker model. Flagged as a testing limitation.</p>
+  </div>
+</div>
+
+<h2>Refinements applied & retested</h2>
+<table>
+<tr><th>Skill</th><th>Refinement</th><th>Retest</th></tr>
+<tr><td class="mono">write-code</td><td>Popen fallback + error-path verification</td><td class="pass">✓ 4/4</td></tr>
+<tr><td class="mono">research</td><td>Hard-stop guardrail on missing sources</td><td class="pass">✓ 2/2</td></tr>
+<tr><td class="mono">resolve-recipient</td><td>Unenumerable groups surface as UNRESOLVED</td><td class="pass">✓ 2/2</td></tr>
+<tr><td class="mono">plan-learning</td><td>Budget arithmetic before planning</td><td class="pass">✓ 2/2</td></tr>
+<tr><td class="mono">write-docs</td><td>Structural drift detection (not just counts)</td><td class="pass">✓ 2/2</td></tr>
+<tr><td class="mono">make-docs</td><td>Heading visual-distinction in render checklist</td><td class="pass">✓ 2/2</td></tr>
+<tr><td class="mono">review-code</td><td>Two-loop check-then-act named as common false positive</td><td class="pass">✓ 2/2</td></tr>
+</table>
+
+<h2>Testing limitations</h2>
+<div class="note">
+<b>1. generate-image output quality untested</b> — no image generator in this environment (no GPU, no HF_TOKEN, feature flag off). Prompt-craft trial stands as record; re-trial where a real generator exists.<br><br>
+<b>2. visualize</b> — render verified (headless Chrome 151), presets verified via sim-math re-execution. Remaining gap: interactive drag not UI-driven (Playwright pass would close it).<br><br>
+<b>3. review-code/review-security 10v10</b> — fixture-and-model dependent. A weaker baseline model would likely show gaps.<br><br>
+<b>4. Single-environment testing</b> — all trials ran on one model (deepseek-v4-flash). Cross-model replication needed before shipping claims.<br><br>
+<b>5. personal-context used seeded memory</b> — long-horizon behavior (memory decay, staleness conflicts) untested.
+</div>
+
+<h2>Recommendations</h2>
+<table>
+<tr><th>Action</th><th>Skills</th></tr>
+<tr><td><b>Ship as defaults</b></td><td class="mono">improve, create-skill, create-agent, create-tool, create-app, personal-context, resolve-recipient, research, plan-learning, write-code, review-code, review-security, simplify-code, write-docs</td></tr>
+<tr><td><b>Install-on-demand</b></td><td class="mono">make-docs, make-slides, make-sheets, make-pdfs, draw-charts, visualize, humanize-text, generate-image</td></tr>
+<tr><td><b>Re-trial before claims</b></td><td class="mono">generate-image (needs generator), visualize (needs Playwright drag check)</td></tr>
+</table>
+
+<h2>Remaining skills to create</h2>
+<table>
+<tr><th>Skill</th><th>Difficulty</th><th>Value</th><th>Depends on</th><th>Status</th></tr>
+<tr><td class="mono">design</td><td>Involved</td><td>High</td><td>—</td><td>Source available in sources/</td></tr>
+<tr><td class="mono">design-artifact</td><td>Complex</td><td>High</td><td>visualize (done ✓)</td><td>Unblocked</td></tr>
+<tr><td class="mono">diagram-artifact</td><td>Complex</td><td>Medium</td><td>visualize (done ✓)</td><td>Unblocked</td></tr>
+<tr><td class="mono">quiz-widget</td><td>Complex</td><td>Medium</td><td>visualize (done ✓)</td><td>Unblocked</td></tr>
+<tr><td class="mono">improve-memory</td><td>Complex</td><td>High</td><td>SDK integration</td><td>Needs Omnideck code work</td></tr>
+<tr><td class="mono">claude-api</td><td>Involved</td><td>Medium</td><td>—</td><td>Source available; heavy curation</td></tr>
+<tr><td class="mono">artifact-capabilities</td><td>Complex</td><td>Low</td><td>Artifact runtime</td><td>Do not port now</td></tr>
+<tr><td class="mono">create-plugin</td><td>Complex</td><td>Low</td><td>Pack/marketplace</td><td>Do not port now</td></tr>
+</table>
+
+<div class="note" style="margin-top:24px">
+<b>Next priority:</b> Cross-model testing — re-run A/B trials against 2–3 alternative models to validate that marginal value holds across model classes. This is the single most impactful follow-up for confidence in the catalog. See TODO.txt for the full plan.
+</div>
+
+</div>
+</body>
+</html>
