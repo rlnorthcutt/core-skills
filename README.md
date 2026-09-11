@@ -56,6 +56,7 @@ Skills are grouped by rollout wave — see each skill's SKILL.md for status.
 | `create-agent` | Create agent profiles — reusable agent configurations bundling a persona (system prompt), skill grants, model, and inference parameters |
 | `create-tool` | Create custom tools — parameterized, reusable operations that persist across sessions and are discoverable by all agents |
 | `create-app` | Create and manage Omnideck Custom Apps — self-contained apps in the apps directory with a manifest (omnideck.json), a web/ frontend, optional app.py backend actions, and data persistence |
+| `install-skill` | Install Agent Skills from any source — git repos, skills.sh, uploaded files, or loose SKILL.md files. Inspects and confirms before installing |
 
 ### Wave 3 — writing, docs & learning
 | Skill | Purpose |
