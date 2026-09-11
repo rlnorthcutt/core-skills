@@ -121,9 +121,12 @@ Patterns that appeared across multiple skills:
 1. **generate-image output quality untested** — no image generator in this
    environment. The trial tested prompt craft, routing, and workflow
    discipline (all passed). Re-trial where a real generator exists.
-2. **visualize T1 validated structurally** (size, no-fetch, wiring, JS
-   balance) rather than by browser render — no browser automation available.
-   The contract compliance is solid; the *rendered experience* is unverified.
+2. **visualize** — originally validated structurally only; a headless-Chrome
+   render pass (2026-09-11) has since confirmed both deliverables render
+   correctly (queue sim: full visual QA pass, presets verified functional by
+   re-executing sim math; static architecture: clean render). Remaining gap:
+   interactive behavior verified by code inspection + math re-execution, not
+   by driving the UI — a Playwright interaction pass would close it.
 3. **review-code/review-security 10v10 results** are fixture-and-model
    dependent. A weaker baseline model would likely show gaps. Their
    prevention value (trap checks, severity honesty) is real but was not
