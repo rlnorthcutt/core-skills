@@ -106,17 +106,14 @@ REMAINING SKILLS TO CREATE
        4. Create skill or tool depending on scope
      Notes: The long-term compounding payoff of the self-improvement loop
 
-[P4] claude-api
-     Difficulty: Involved
-     Value: Medium
-     Source: sources/claude-skills/builtin-skills/claude-api/ (1.1MB multi-language
-             reference tree)
-     Steps:
-       1. Condense the 1.1MB reference to a curated prompt (~4000 chars)
-       2. Pick the most useful subset (Python + TypeScript probably)
-       3. Generalize beyond Claude to OpenAI/Gemini if desired
-       4. Create skill.json + SKILL.md
-     Notes: Useful for ecosystem dev, niche for end users
+[SKIPPED] claude-api
+     Reason: Provider-locked (Anthropic-only), 1.1MB of reference that goes
+             stale, and Omnideck already abstracts LLM calls via its provider
+             system (anthropic/openai/openrouter/ollama). The narrow audience
+             (custom app devs needing direct API access) is better served by
+             web search + SDK docs at build time. If a real use case emerges,
+             build a thin write-llm-integration skill instead.
+     Source material: preserved in sources/claude-skills/builtin-skills/claude-api/
 
 [P4] artifact-capabilities
      Difficulty: Complex
