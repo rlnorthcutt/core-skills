@@ -55,7 +55,7 @@
 <div class="wrap">
 
 <h1>core-skills — Test Results Report</h1>
-<div class="sub">A/B trial results for all catalog skills · deepseek-v4-flash via code_expert/research_agent profiles · 2026-09-09 → 2026-09-11 · commits a1dac16 → 7c3c71b</div>
+<div class="sub">A/B trial results for all catalog skills · deepseek-v4-flash via code_expert/research_agent profiles · 2026-09-09 → 2026-09-11 · commits a1dac16 → 19cda69</div>
 
 <div class="stats">
   <div class="stat"><div class="n" style="color:var(--pass)">23/23</div><div class="l">skills PASS</div></div>
@@ -94,7 +94,7 @@
 <tr><td class="mono">review-security</td><td><span class="tier craft">Craft</span></td><td>10.0</td><td>10.0</td><td>1×</td><td><span class="bar bar-base" style="width:200px"></span> <span class="bar bar-treat" style="width:200px"></span></td></tr>
 </table>
 
-<div class="note"><b>install-skill</b> — created and e2e tested (git clone → inspect → install → verified in catalog) but not yet formally A/B tested. See TODO.txt for the testing plan.</div>
+<div class="note"><b>install-skill</b> — created, e2e tested (git clone → inspect → install → verified in catalog), and recommended for ship-as-defaults. Formal A/B testing still pending (see TODO.txt). Also discovered during install-skill research: <b>wiki-builder.json bug</b> — pack-wrapped format silently skipped by the Omnideck loader (29/30 records load).</div>
 
 <h2>The three tiers</h2>
 <div class="grid">
@@ -105,7 +105,7 @@
   </div>
   <div class="card"><h3 style="color:var(--disc)">Discipline</h3>
     <p>The baseline <b>acted but acted wrongly</b> — fabricated data, mis-sent mail, shipped sprawl. The skill prevents concrete harm.</p>
-    <p><span class="mono">research</span> · <span class="mono">create-agent</span> · <span class="mono">create-skill</span> · <span class="mono">resolve-recipient</span> · <span class="mono">create-tool</span> · <span class="mono">personal-context</span> · <span class="mono">generate-image</span></p>
+    <p><span class="mono">research</span> · <span class="mono">create-agent</span> · <span class="mono">create-skill</span> · <span class="mono">create-tool</span> · <span class="mono">install-skill</span> · <span class="mono">resolve-recipient</span> · <span class="mono">personal-context</span> · <span class="mono">generate-image</span></p>
     <p style="color:var(--disc)">2.5–5× marginal value</p>
   </div>
   <div class="card"><h3 style="color:var(--craft)">Craft Reinforcement</h3>
@@ -166,15 +166,19 @@
 <b>5. personal-context used seeded memory</b> — long-horizon behavior (memory decay, staleness conflicts) untested.
 </div>
 
+<h2>Bugs discovered during testing</h2>
+<div class="finding"><span class="skill">omnideck</span> — <b>wiki-builder.json pack-wrapped format silently skipped</b>: The file uses <code>{"skill": {...}}</code> wrapping (from a pack import) but <code>_load_all()</code> expects direct SkillRecord format. Result: only 29/30 records load from the skills dir — wiki-builder is invisible to agents. Fix: unwrap to a direct record. File as Omnideck bug.</div>
+
 <h2>Recommendations</h2>
 <table>
 <tr><th>Action</th><th>Skills</th></tr>
-<tr><td><b>Ship as defaults</b></td><td class="mono">improve, create-skill, create-agent, create-tool, create-app, personal-context, resolve-recipient, research, plan-learning, write-code, review-code, review-security, simplify-code, write-docs</td></tr>
+<tr><td><b>Ship as defaults</b></td><td class="mono">improve, create-skill, create-agent, create-tool, create-app, install-skill, personal-context, resolve-recipient, research, plan-learning, write-code, review-code, review-security, simplify-code, write-docs</td></tr>
 <tr><td><b>Install-on-demand</b></td><td class="mono">make-docs, make-slides, make-sheets, make-pdfs, draw-charts, visualize, humanize-text, generate-image</td></tr>
 <tr><td><b>Re-trial before claims</b></td><td class="mono">generate-image (needs generator), visualize (needs Playwright drag check)</td></tr>
 </table>
 
 <h2>Remaining skills to create</h2>
+<p class="sub">7 remaining after skipping claude-api (8 planned → 7 active + 1 skipped)</p>
 <table>
 <tr><th>Skill</th><th>Difficulty</th><th>Value</th><th>Depends on</th><th>Status</th></tr>
 <tr><td class="mono">design</td><td>Involved</td><td>High</td><td>—</td><td>Source available in sources/</td></tr>
@@ -182,7 +186,7 @@
 <tr><td class="mono">diagram-artifact</td><td>Complex</td><td>Medium</td><td>visualize (done ✓)</td><td>Unblocked</td></tr>
 <tr><td class="mono">quiz-widget</td><td>Complex</td><td>Medium</td><td>visualize (done ✓)</td><td>Unblocked</td></tr>
 <tr><td class="mono">improve-memory</td><td>Complex</td><td>High</td><td>SDK integration</td><td>Needs Omnideck code work</td></tr>
-<tr><td class="mono">claude-api</td><td>Involved</td><td>Medium</td><td>—</td><td>Source available; heavy curation</td></tr>
+<tr><td class="mono" style="color:var(--muted);text-decoration:line-through">claude-api</td><td>—</td><td>—</td><td>—</td><td style="color:var(--muted)">SKIPPED — provider-locked, Omnideck abstracts LLM calls</td></tr>
 <tr><td class="mono">artifact-capabilities</td><td>Complex</td><td>Low</td><td>Artifact runtime</td><td>Do not port now</td></tr>
 <tr><td class="mono">create-plugin</td><td>Complex</td><td>Low</td><td>Pack/marketplace</td><td>Do not port now</td></tr>
 </table>
